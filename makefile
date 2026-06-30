@@ -1,0 +1,12 @@
+SRC = 	src/lexer/lexer.c \
+		src/parser/parser.c \
+		src/ast/ast.c \
+		src/eval/eval.c
+
+UTILS = utils/vector/vector.c
+
+CFLAGS = -Isrc -Iutils -Idefines -Wall -Wextra
+
+all:
+	mkdir -p build
+	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
