@@ -1,7 +1,8 @@
 
-``` tree
+```
 lang
 ├─ build
+│  └─ lang
 ├─ main.c
 ├─ makefile
 ├─ src
@@ -21,6 +22,7 @@ lang
    ├─ defines
    │  └─ def.h
    └─ vector
+      ├─ README.md
       ├─ vector.c
       └─ vector.h
 
