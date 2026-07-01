@@ -1,4 +1,4 @@
-# Vector
+# Vector - Português
 
 Array dinâmico genérico em C, inspirado no `vector<T>` do C++. Usa `void*` para ser compatível com qualquer tipo de dado.
 
