@@ -42,7 +42,7 @@ freeVector(vec);
 Adiciona um elemento no final. Cresce automaticamente quando necessário.
 ```c
 int x = 42;
-appendVector(vec, &x);
+vec = appendVector(vec, &x);
 ```
 
 ### `getVector`
@@ -103,7 +103,7 @@ Vector* vec = newVector();
 vec->__init__(vec, sizeof(int));
 
 for (int i = 0; i < 10; i++) {
-    appendVector(vec, &i);
+    vec = appendVector(vec, &i);
 }
 
 VECTOR_FOR_EACH(vec, int, item, {
