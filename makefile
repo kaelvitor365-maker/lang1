@@ -5,8 +5,11 @@ SRC = 	src/lexer/lexer.c \
 
 UTILS = utils/vector/vector.c
 
-CFLAGS = -Isrc -Iutils -Idefines -Wall -Wextra
+CFLAGS = -Isrc -Iutils -Iutils/defines -Wall -Wextra
 
 all:
 	mkdir -p build
 	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
+
+run:
+	./build/lang $(ARGS)
