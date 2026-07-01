@@ -1,6 +1,17 @@
 #include "vector.h"
 #include <stdio.h>
 
+Vector* Vector__resize(Vector* this){
+    void* temp = realloc(this->__data, (this->__capacity << 1) * this->__size_value);
+    if(temp == NULL){
+        printf("MALLOC ERROR\n");
+        return NULL;
+    }
+    this->__data = temp;
+    this->__capacity <<= 1;
+    
+    return this;
+}
 // vector intern starter
 void Vector__init__(Vector* this, const size_t size_value){
     if(this == NULL){ // test error
@@ -76,25 +87,60 @@ Vector* appendVector(Vector* this, const void* value){
     if(this->__size == this->__capacity){ // test size of vector
 
 
-        void* temp = realloc(this->__data, (this->__capacity << 1) * this->__size_value);
-        if(temp == NULL){ // test error
-            printf("MALLOC ERROR IN appendVector\n");
+        Vector* temp = Vector__resize(this);
+        if(temp == NULL){
+            printf("RESIZE ERROR\n");
             return this;
         }
-
-        // update the vector
-        this->__data = temp;
-        this->__capacity <<= 1;
     }
 
     // finaly update the vector
-    void* pointer = (char*)this->__data + (this->__size * this->__size_value);
+    void* pointer = CAST_TO(char*, this->__data) + (this->__size * this->__size_value);
     memcpy(pointer, value, this->__size_value);
     ++this->__size;
     
     return this;
 }
 
+Vector* extendVector(Vector* this, const Vector* src){
+    if(this == NULL){
+        printf("extendVector(THIS IS NULL)\n");
+        return this;       
+    }
+    if(src == NULL){
+        printf("extendVector(SRC IS NULL)\n");
+        return this;       
+    }
+    if(this->__data == NULL){
+        printf("THIS NEED START WITH .__init__(THIS)\n");
+        return this;
+    }
+    if(src->__data == NULL){
+        printf("SRC NEED START WITH .__init__(SRC)\n");
+        return this;
+    }
+    if(this->__size_value != src->__size_value){
+        printf("SRC DO NOT HAVE SAME SIZE_VALUE\n");
+        return this;
+    }
+
+    if(this->__size + src->__size >= this->__capacity){
+        void* temp = realloc(this->__data, ((this->__capacity + src->__size) << 1) * this->__size_value);
+        if(temp == NULL){
+            printf("MALLOC ERROR\n");
+            return this;
+        }
+        this->__data = temp;
+        this->__capacity += src->__size;
+        this->__capacity <<= 1;
+    }
+    void* dest = CAST_TO(char*, this->__data) + (this->__size * this->__size_value);
+    memcpy(dest, src->__data, src->__size*src->__size_value);
+    this->__size += src->__size;
+    
+    return this;
+
+}
 // pop value in the vector
 Vector* popVector(Vector* this){
     if(this == NULL){ // test error
@@ -132,7 +178,7 @@ void* getVector(Vector* this, const size_t pos){
         return NULL;
     }
 
-    return (char*)this->__data + (pos * this->__size_value); // the position
+    return CAST_TO(char*, this->__data) + (pos * this->__size_value); // the position
 }
 
 // setting the value in the vector
@@ -152,7 +198,7 @@ Vector* setVector(Vector* this, const size_t pos, const void* value){
         return this;
     }
 
-    void* pointer = (char*)this->__data + (pos * this->__size_value); // getting the pos
+    void* pointer = CAST_TO(char*, this->__data) + (pos * this->__size_value); // getting the pos
     memcpy(pointer, value, this->__size_value); // setting the value
 
     return this;

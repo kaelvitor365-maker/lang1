@@ -20,10 +20,15 @@ CLASS(Vector, {
 
 
 Vector* newVector();
-void freeVetor(Vector* this);
+void freeVector(Vector* this);
+
+Vector* Vector__resize(Vector* this);
 
 Vector* appendVector(Vector* this,const void* value);
+Vector* extendVector(Vector* this, const Vector* src);
 Vector* popVector(Vector* this);
 
 void* getVector(Vector* this, const size_t pos);
 Vector* setVector(Vector* this, const size_t pos, const void* value);
+
+bool inVector(Vector* this, const void* value);
