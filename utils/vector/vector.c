@@ -137,7 +137,7 @@ Vector* extendVector(Vector* this, const Vector* src){
     void* dest = CAST_TO(char*, this->__data) + (this->__size * this->__size_value);
     memcpy(dest, src->__data, src->__size*src->__size_value);
     this->__size += src->__size;
-    
+
     return this;
 
 }
@@ -204,6 +204,30 @@ Vector* setVector(Vector* this, const size_t pos, const void* value){
     return this;
 }
 
+
+bool inVector(Vector* this, const void* value){
+    if(this == NULL){
+        printf("inVector(THIS IS NULL)\n");
+        return false;
+    }
+    if(this->__data == NULL){
+        printf("NEED START THE VECTOR WITH .__init__(Vector* this, size_t size_value)\n");
+        return false;
+    }
+    if(value == NULL){
+        printf("inVector(VALUE IS NULL)\n");
+        return false;
+    }
+    for(int i = 0; i < this->__size; ++i){
+        if(memcmp(
+            CAST_TO(char*, this->__data) + (i * this->__size_value),
+            value,
+            this->__size_value
+        ) == 0)
+            return true;
+    }
+    return false;
+}
 
 
 
