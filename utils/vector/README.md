@@ -61,13 +61,13 @@ vec = setVector(vec, 0, &x);
 ### `popVector`
 Remove o último elemento (decrementa `__size`).
 ```c
-popVector(vec);
+vec = popVector(vec);
 ```
 
 ### `extendVector`
 Copia todos os elementos de `src` para o final de `this`. Os dois vetores precisam ter o mesmo `__size_value`.
 ```c
-extendVector(vec_a, vec_b);
+vec = extendVector(vec_a, vec_b);
 ```
 
 ### `inVector`
