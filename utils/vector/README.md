@@ -55,7 +55,7 @@ int* val = (int*)getVector(vec, 0);
 Sobrescreve o valor na posição `pos`.
 ```c
 int x = 99;
-setVector(vec, 0, &x);
+vec = setVector(vec, 0, &x);
 ```
 
 ### `popVector`
