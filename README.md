@@ -1,5 +1,5 @@
 
-```
+``` tree
 lang
 ├─ build
 ├─ main.c
