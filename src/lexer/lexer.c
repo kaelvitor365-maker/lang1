@@ -7,9 +7,9 @@ Lexer* newLexer(const char* __arq){
     Lexer* lexer;
     if(file == NULL) goto file_error;
 
-    if(fseek(file, 0, SEEK_END) != 0) goto file_error;
+    if(fseek(file, 0, SEEK_END) != 0) goto seek_error;
     size_t size = ftell(file);
-    if(fseek(file, 0, SEEK_SET) != 0) goto file_error;
+    if(fseek(file, 0, SEEK_SET) != 0) goto seek_error;
 
     lexer = malloc(sizeof(Lexer));
     if(lexer == NULL) goto lexer_malloc_error;
@@ -31,8 +31,10 @@ file_malloc_error:
 
 lexer_malloc_error:
     free(lexer);
-    
+
+seek_error: 
     fclose(file);
+
 file_error:
     return NULL;
 }
