@@ -22,7 +22,7 @@ CLASS(Vector, {
     size_t __size_value;
     void (*__init__)(struct Vector_t*, size_t);
     void (*__del__)(struct Vector_t*);
-});
+})
 
 /**
  * @brief Aloca e retorna um novo Vector.
