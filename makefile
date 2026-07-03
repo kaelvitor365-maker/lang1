@@ -1,4 +1,5 @@
-SRC = 	src/lexer/lexer.c \
+SRC = 	src/lexer/lexerPass1.c \
+		src/lexer/lexerPass2.c \
 		src/parser/parser.c \
 		src/ast/ast.c \
 		src/eval/eval.c
