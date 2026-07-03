@@ -14,8 +14,10 @@ ENUM(TokenType,
     TOKEN_ELSE,
     TOKEN_FOR,
     TOKEN_WHILE,
+    TOKEN_INFWHILE,
+    TOKEN_BREAK,
+    TOKEN_CONTINUE,
 
-    TOKEN_NEWLINE,
     TOKEN_SEMICOLON,
 
     TOKEN_DOT,
@@ -24,6 +26,7 @@ ENUM(TokenType,
     TOKEN_LT,
 
     TOKEN_NOT,
+    TOKEN_NOTB,
     TOKEN_EQUAL,
     TOKEN_AND,
     TOKEN_OR,
@@ -77,10 +80,12 @@ CLASS(Token, {
 
 CLASS(Lexer, {
     char* file;
-    size_t pos;
+    char* pos;
     size_t line;
 })
 
 Lexer* newLexer(const char* __arq);
 
 void* freeLexer(Lexer* this);
+
+Token* Lexer__LexerNext(Lexer* this);
