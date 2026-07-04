@@ -6,7 +6,7 @@ SRC = 	src/lexer/lexerPass1.c \
 
 UTILS = utils/vector/vector.c
 
-CFLAGS = -Isrc -Iutils -Iutils/defines -Wall -Wextra
+CFLAGS = -Isrc -Iutils -Iutils/defines -Iutils/vector -Wall -Wextra
 
 all:
 	mkdir -p build

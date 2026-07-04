@@ -7,6 +7,9 @@ ENUM(TokenType,
     TOKEN_FUNC,
     TOKEN_RET,
     TOKEN_COLON,
+    TOKEN_COMMENTLINE,
+    TOKEN_BEGINCOMMENTMULTLINE,
+    TOKEN_ENDCOMMENTMULTLINE,
 
     TOKEN_VAR,
 
@@ -41,8 +44,7 @@ ENUM(TokenType,
     TOKEN_LBRACKET,
     TOKEN_RBRACKET,
 
-    TOKEN_INT,
-    TOKEN_FLOAT,
+    TOKEN_NUMBER,
     TOKEN_BOOL,
     TOKEN_STR,
 
@@ -50,7 +52,7 @@ ENUM(TokenType,
     TOKEN_MINUS,
     TOKEN_DIV,
     TOKEN_MUL,
-    TOKEN_LSHITF,
+    TOKEN_LSHIFT,
     TOKEN_RSHIFT,
 
     TOKEN_EQEQ,
@@ -66,6 +68,9 @@ ENUM(TokenType,
     TOKEN_DIVEQ,
     TOKEN_LSHIFTEQ,
     TOKEN_RSHIFTEQ,
+
+    TOKEN_INC,
+    TOKEN_DEC,
 
 
     TOKEN_UNDEFINED,
@@ -89,3 +94,7 @@ Lexer* newLexer(const char* __arq);
 void* freeLexer(Lexer* this);
 
 Token* Lexer__LexerNext(Lexer* this);
+
+Vector* Lexer__Tokenize(Lexer* this);
+
+Vector* Lexer__TransformTokens(Vector* arr);

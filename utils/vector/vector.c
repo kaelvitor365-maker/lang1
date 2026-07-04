@@ -218,7 +218,7 @@ bool inVector(Vector* this, const void* value){
         printf("inVector(VALUE IS NULL)\n");
         return false;
     }
-    for(int i = 0; i < this->__size; ++i){
+    for(size_t i = 0; i < this->__size; ++i){
         if(memcmp(
             CAST_TO(char*, this->__data) + (i * this->__size_value),
             value,

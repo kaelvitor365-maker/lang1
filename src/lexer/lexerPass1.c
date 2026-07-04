@@ -99,7 +99,7 @@ static inline bool matchChar(Lexer *this, char c, TokenType type, Token* token){
 
 Token* tokenNumber(Lexer* this, Token* token){
     token->line = this->line;
-    token->type = TOKEN_INT;
+    token->type = TOKEN_NUMBER;
 
     char* ptr = token->word;
     while(isNumber(peekLexer(this))){
