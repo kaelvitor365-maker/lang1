@@ -1,7 +1,7 @@
 #include "vector.h"
 #include <stdio.h>
 
-Vector* Vector__resize(Vector* this){
+PTR(_Vector) Vector__resize(PTR(_Vector) this){
     void* temp = realloc(this->__data, (this->__capacity << 1) * this->__size_value);
     if(temp == NULL){
         printf("MALLOC ERROR\n");
@@ -13,7 +13,7 @@ Vector* Vector__resize(Vector* this){
     return this;
 }
 // vector intern starter
-void Vector__init__(Vector* this, const size_t size_value){
+void Vector__init__(PTR(_Vector) this, const size_t size_value){
     if(this == NULL){ // test error
         printf("__INIT__(THE VECTOR IS NULL) this == NULL\n");
         return;
@@ -32,7 +32,7 @@ void Vector__init__(Vector* this, const size_t size_value){
 }
 
 // clean the intern process of vector
-void Vector__del__(Vector* this){
+void Vector__del__(PTR(_Vector) this){
     if(this == NULL){ // test error
         printf("__DEL__(THE VECTOR IS NULL) this == NULL\n");
         return;
@@ -46,8 +46,8 @@ void Vector__del__(Vector* this){
 }
 
 // allocator of Vector
-Vector* newVector(){
-    Vector* this = malloc(sizeof(Vector));
+PTR(_Vector) Vector__newVector(){
+    PTR(_Vector) this = malloc(sizeof(PTR(_Vector)));
     if(this == NULL) goto error;
 
     this->__init__ = &Vector__init__;
@@ -61,7 +61,7 @@ error:
 
 
 // unallocator of Vector
-void freeVector(Vector* this){
+void* Vector__freeVector(PTR(_Vector) this){
     if(this == NULL){
         printf("THIS IS NULL IN THE FREE VECTOR\n");
         return;
@@ -70,10 +70,11 @@ void freeVector(Vector* this){
     this->__del__(this);
 final_free:
     free(this);
+    return NULL;
 }
 
 // append value in the vector
-Vector* appendVector(Vector* this, const void* value){
+PTR(_Vector) Vector__appendVector(PTR(_Vector) this, const void* value){
     if(this == NULL){ // test error
         printf("appendVector(THIS IS NULL)\n");
         return this;
@@ -87,7 +88,7 @@ Vector* appendVector(Vector* this, const void* value){
     if(this->__size == this->__capacity){ // test size of vector
 
 
-        Vector* temp = Vector__resize(this);
+        PTR(_Vector) temp = Vector__resize(this);
         if(temp == NULL){
             printf("RESIZE ERROR\n");
             return this;
@@ -102,7 +103,7 @@ Vector* appendVector(Vector* this, const void* value){
     return this;
 }
 
-Vector* extendVector(Vector* this, const Vector* src){
+PTR(_Vector) Vector__extendVector(PTR(_Vector) this, const PTR(_Vector) src){
     if(this == NULL){
         printf("extendVector(THIS IS NULL)\n");
         return this;       
@@ -142,7 +143,7 @@ Vector* extendVector(Vector* this, const Vector* src){
 
 }
 // pop value in the vector
-Vector* popVector(Vector* this){
+PTR(_Vector) Vector__popVector(PTR(_Vector) this){
     if(this == NULL){ // test error
         printf("popVector(THIS IS NULL)\n");
         return this;
@@ -162,7 +163,7 @@ Vector* popVector(Vector* this){
 }
 
 //getting the value of one position
-void* getVector(Vector* this, const size_t pos){
+void* Vector__getVector(PTR(_Vector) this, const size_t pos){
     if(this == NULL){ // test error
         printf("getVector(THIS IS NULL)\n");
         return NULL;
@@ -182,7 +183,7 @@ void* getVector(Vector* this, const size_t pos){
 }
 
 // setting the value in the vector
-Vector* setVector(Vector* this, const size_t pos, const void* value){
+PTR(_Vector) Vector__setVector(PTR(_Vector) this, const size_t pos, const void* value){
     if(this == NULL){ // test error
         printf("getVector(THIS IS NULL)\n");
         return this;
@@ -205,7 +206,7 @@ Vector* setVector(Vector* this, const size_t pos, const void* value){
 }
 
 
-bool inVector(Vector* this, const void* value){
+bool inVector(PTR(_Vector) this, const void* value){
     if(this == NULL){
         printf("inVector(THIS IS NULL)\n");
         return false;

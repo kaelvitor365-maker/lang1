@@ -1,9 +1,13 @@
 #pragma once
 
-#define CLASS(name, scope) struct name##_t scope; typedef struct name##_t name;
-#define ENUM(name, ...) typedef enum { __VA_ARGS__} name;
-#define CAST_TO(type, val) ((type)(val))
-#define len(object) ((object)->__size)
-#define VECTOR_FOR_EACH(vector, type, var, body) for(size_t _i = 0; _i < len(vector); ++_i) { type* var = getVector(vector, _i); body}
+#define INTERN_NAME(name) struct name##_t
 #define PTR(type) type* 
 #define USE_PTR(ptr) (*ptr) 
+#define CAST_TO(type, val) ((type)(val))
+
+#define len(object) ((object)->__size)
+
+
+#define FUNCTIONS(name, ...) (*name)(__VA_ARGS__);
+#define CLASS(name, scope) INTERN_NAME(name) scope; typedef INTERN_NAME(name) name;
+#define ENUM(name, ...) typedef enum { __VA_ARGS__} name;
