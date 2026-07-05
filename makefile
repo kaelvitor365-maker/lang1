@@ -13,4 +13,4 @@ all:
 	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
 
 run:
-	./build/lang $(ARGS)
+	./build/lang
