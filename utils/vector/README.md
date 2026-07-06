@@ -20,7 +20,7 @@ CLASS(_Vector, {
 typedef _Vector Vector; // alias público
 ```
 
-### `ITERATOR(_Vector)` — iterador
+### `VectorIterator` — iterador
 ```c
 CLASS(__it__Vector, {
     void*  __data;        // início do buffer
@@ -33,7 +33,7 @@ CLASS(__it__Vector, {
 ### `Vector_t` — namespace de funções
 Objeto global que agrupa todas as funções como "métodos":
 ```c
-extern Vector_t Vector;
+extern _Vector_t VectorF;
 ```
 
 ---
@@ -51,14 +51,14 @@ vec->__init__(true, vec, sizeof(void*));
 
 // Adicionar
 int x = 42;
-Vector.append(vec, &x);
+vec = Vector.append(vec, &x);
 
 // Acessar
 int* val = (int*)Vector.get(vec, 0);
 
 // Modificar
 int y = 99;
-Vector.set(vec, 0, &y);
+vec = Vector.set(vec, 0, &y);
 
 // Remover último
 Vector.pop(vec);
@@ -68,7 +68,7 @@ int z = 42;
 if (Vector.in(vec, &z)) { ... }
 
 // Extender com outro vector
-Vector.extend(vec_a, vec_b);
+vec = Vector.extend(vec_a, vec_b);
 
 // Liberar
 Vector.free(vec);
@@ -96,15 +96,11 @@ Vector.free(vec);
 
 ```c
 // Criar iterador
-__it__Vector* it = Vector.begin(vec);
-__it__Vector* end = Vector.end(vec);
+VectorIterator* it = Vector.begin(vec);
+VectorIterator* end = Vector.end(vec);
 
 // Iterar
-while (it->__pos != end->__pos) {
-    int* val = (int*)Vector.getIterator(it);
-    printf("%d\n", *val);
-    Vector.next(it);
-}
+for(VectorIterator it = Vector.begin(vec); it->__pos != Vector.end(vec)->__pos; it = Vector.next(it));
 
 // Liberar
 free(it);
