@@ -53,7 +53,7 @@ CLASS(_Vector_t, {
     INTERN_NAME(_Vector)* FUNCTIONS(set, INTERN_NAME(_Vector)*, const size_t, void*)
     bool FUNCTIONS(in, INTERN_NAME(_Vector)*, const void*)
     __it__Vector* FUNCTIONS(begin, INTERN_NAME(_Vector)*)
-    __it__Vector* FUNCTIONS(end, INTERN_NAME(_Vector)*)
+    void* FUNCTIONS(end, INTERN_NAME(_Vector)*)
     __it__Vector* FUNCTIONS(next, __it__Vector*)
     __it__Vector* FUNCTIONS(prev, __it__Vector*)
     void* FUNCTIONS(getIterator, __it__Vector*)
@@ -155,7 +155,7 @@ __it__Vector* Vector__itBegin(_Vector* this);
  * @param this Ponteiro para o Vector.
  * @return Ponteiro para o iterador, ou NULL se falhar.
  */
-__it__Vector* Vector__itEnd(_Vector* this);
+void* Vector__itEnd(_Vector* this);
 
 /**
  * @brief Retorna ponteiro pro elemento atual do iterador.

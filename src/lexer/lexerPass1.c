@@ -21,7 +21,7 @@ Lexer* newLexer(const char* __arq){
 
     fclose(file);
 
-    lexer->line = 0;
+    lexer->line = 1;
     lexer->pos = lexer->file;
     return lexer;
 
