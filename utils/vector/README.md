@@ -51,27 +51,27 @@ vec->__init__(true, vec, sizeof(void*));
 
 // Adicionar
 int x = 42;
-vec = Vector.append(vec, &x);
+vec = VectorF.append(vec, &x);
 
 // Acessar
-int* val = (int*)Vector.get(vec, 0);
+int* val = (int*)VectorF.get(vec, 0);
 
 // Modificar
 int y = 99;
-vec = Vector.set(vec, 0, &y);
+vec = VectorF.set(vec, 0, &y);
 
 // Remover último
-Vector.pop(vec);
+vec = VectorF.pop(vec);
 
 // Verificar existência
 int z = 42;
-if (Vector.in(vec, &z)) { ... }
+if (VectorF.in(vec, &z)) { ... }
 
 // Extender com outro vector
-vec = Vector.extend(vec_a, vec_b);
+vec = VectorF.extend(vec_a, vec_b);
 
 // Liberar
-Vector.free(vec);
+VectorF.free(vec);
 ```
 
 ---
@@ -82,13 +82,13 @@ Vector.free(vec);
 |--------|-----------|
 | `Vector.new()` | Aloca a struct. Chame `__init__` antes de usar. |
 | `vec->__init__(is_ptr, vec, sizeof(T))` | Inicializa o buffer com capacidade para 8 elementos |
-| `Vector.free(vec)` | Libera buffer interno e a struct |
-| `Vector.append(vec, &val)` | Adiciona elemento no final, cresce automaticamente |
-| `Vector.extend(vec, src)` | Copia todos os elementos de `src` pro final de `vec` |
-| `Vector.pop(vec)` | Remove o último elemento |
-| `Vector.get(vec, pos)` | Retorna ponteiro pro elemento na posição `pos` |
-| `Vector.set(vec, pos, &val)` | Sobrescreve o valor na posição `pos` |
-| `Vector.in(vec, &val)` | Retorna `true` se o valor existir (usa `memcmp`) |
+| `VectorF.free(vec)` | Libera buffer interno e a struct |
+| `VectorF.append(vec, &val)` | Adiciona elemento no final, cresce automaticamente |
+| `VectorF.extend(vec, src)` | Copia todos os elementos de `src` pro final de `vec` |
+| `VectorF.pop(vec)` | Remove o último elemento |
+| `VectorF.get(vec, pos)` | Retorna ponteiro pro elemento na posição `pos` |
+| `VectorF.set(vec, pos, &val)` | Sobrescreve o valor na posição `pos` |
+| `VectorF.in(vec, &val)` | Retorna `true` se o valor existir (usa `memcmp`) |
 
 ---
 
@@ -96,25 +96,23 @@ Vector.free(vec);
 
 ```c
 // Criar iterador
-VectorIterator* it = Vector.begin(vec);
-VectorIterator* end = Vector.end(vec);
+VectorIterator* it = VectorF.begin(vec);
 
 // Iterar
-for(VectorIterator it = Vector.begin(vec); it->__pos != end->__pos; it = Vector.next(it));
+for(VectorIterator it = Vector.begin(vec); it->__pos != vectorF->end(vec); it = Vector.next(it));
 
 // Liberar
 free(it);
-free(end);
 ```
 
 | Função | Descrição |
 |--------|-----------|
-| `Vector.begin(vec)` | Cria iterador apontando pro primeiro elemento |
-| `Vector.end(vec)` | Cria iterador apontando após o último elemento |
-| `Vector.next(it)` | Avança o iterador uma posição |
-| `Vector.prev(it)` | Recua o iterador uma posição |
-| `Vector.getIterator(it)` | Retorna ponteiro pro elemento atual |
-| `Vector.setIterator(it, pos)` | Move o iterador para uma posição arbitrária |
+| `VectorF.begin(vec)` | Cria iterador apontando pro primeiro elemento |
+| `VectorF.end(vec)` | Cria iterador apontando após o último elemento |
+| `VectorF.next(it)` | Avança o iterador uma posição |
+| `VectorF.prev(it)` | Recua o iterador uma posição |
+| `VectorF.getIterator(it)` | Retorna ponteiro pro elemento atual |
+| `VectorF.setIterator(it, pos)` | Move o iterador para uma posição arbitrária |
 
 ---
 
@@ -125,7 +123,7 @@ Quando `__is_ptr = true`, `get` e `getIterator` desreferenciam automaticamente o
 ```c
 // sem is_ptr: recebe void* apontando pro buffer interno
 // com is_ptr: recebe diretamente o ponteiro guardado
-Token* t = (Token*)Vector.get(vec, 0); // já desreferenciado!
+Token* t = (Token*)VectorF.get(vec, 0); // já desreferenciado!
 ```
 
 ---
