@@ -1,122 +1,154 @@
-# Vector - Português
+# Vector
 
-Array dinâmico genérico em C, inspirado no `vector<T>` do C++. Usa `void*` para ser compatível com qualquer tipo de dado.
+Array dinâmico genérico em C, inspirado no `vector<T>` do C++. Usa `void*` para ser compatível com qualquer tipo de dado. Inclui suporte a iteradores.
 
 ---
 
-## Estrutura
+## Estruturas
 
+### `_Vector` (interna)
 ```c
-CLASS(Vector, {
+CLASS(_Vector, {
     void*  __data;        // buffer interno
-    size_t __size;        // quantidade de elementos
-    size_t __capacity;    // capacidade alocada
+    size_t __size;        // quantidade atual de elementos
+    size_t __capacity;    // capacidade total alocada
     size_t __size_value;  // tamanho de cada elemento (sizeof(T))
-    void (*__init__)(struct Vector_t*, size_t);
-    void (*__del__)(struct Vector_t*);
+    bool   __is_ptr;      // true se os elementos são ponteiros
+    void (*__init__)(bool, _Vector*, size_t);
+    void (*__del__)(_Vector*);
+});
+typedef _Vector Vector; // alias público
+```
+
+### `ITERATOR(_Vector)` — iterador
+```c
+CLASS(__it__Vector, {
+    void*  __data;        // início do buffer
+    void*  __pos;         // posição atual
+    size_t __size_value;  // tamanho de cada elemento
+    bool   __is_ptr;      // true se os elementos são ponteiros
 });
 ```
 
----
-
-## Criando e destruindo
-
+### `Vector_t` — namespace de funções
+Objeto global que agrupa todas as funções como "métodos":
 ```c
-// Aloca um novo Vector
-Vector* vec = newVector();
-
-// Inicializa com o tipo desejado (obrigatório antes de usar)
-vec->__init__(vec, sizeof(int));
-
-// Libera tudo (dados + struct)
-freeVector(vec);
+extern Vector_t Vector;
 ```
 
-> ⚠️ Sempre chame `__init__` antes de qualquer outra operação.
+---
+
+## Uso básico
+
+```c
+// Criar (elementos por valor)
+Vector* vec = Vector.new();
+vec->__init__(false, vec, sizeof(int));
+
+// Criar (elementos por ponteiro)
+Vector* vec = Vector.new();
+vec->__init__(true, vec, sizeof(void*));
+
+// Adicionar
+int x = 42;
+Vector.append(vec, &x);
+
+// Acessar
+int* val = (int*)Vector.get(vec, 0);
+
+// Modificar
+int y = 99;
+Vector.set(vec, 0, &y);
+
+// Remover último
+Vector.pop(vec);
+
+// Verificar existência
+int z = 42;
+if (Vector.in(vec, &z)) { ... }
+
+// Extender com outro vector
+Vector.extend(vec_a, vec_b);
+
+// Liberar
+Vector.free(vec);
+```
 
 ---
 
 ## Funções
 
-### `appendVector`
-Adiciona um elemento no final. Cresce automaticamente quando necessário.
-```c
-int x = 42;
-vec = appendVector(vec, &x);
-```
-
-### `getVector`
-Retorna um ponteiro para o elemento na posição `pos`.
-```c
-int* val = (int*)getVector(vec, 0);
-```
-
-### `setVector`
-Sobrescreve o valor na posição `pos`.
-```c
-int x = 99;
-vec = setVector(vec, 0, &x);
-```
-
-### `popVector`
-Remove o último elemento (decrementa `__size`).
-```c
-vec = popVector(vec);
-```
-
-### `extendVector`
-Copia todos os elementos de `src` para o final de `this`. Os dois vetores precisam ter o mesmo `__size_value`.
-```c
-vec = extendVector(vec_a, vec_b);
-```
-
-### `inVector`
-Verifica se um valor existe no vetor usando `memcmp`.
-```c
-int x = 42;
-if (inVector(vec, &x)) { ... }
-```
-
-### `Vector__resize` (interno)
-Dobra a capacidade do vetor. Chamado automaticamente pelo `appendVector`.
+| Função | Descrição |
+|--------|-----------|
+| `Vector.new()` | Aloca a struct. Chame `__init__` antes de usar. |
+| `vec->__init__(is_ptr, vec, sizeof(T))` | Inicializa o buffer com capacidade para 8 elementos |
+| `Vector.free(vec)` | Libera buffer interno e a struct |
+| `Vector.append(vec, &val)` | Adiciona elemento no final, cresce automaticamente |
+| `Vector.extend(vec, src)` | Copia todos os elementos de `src` pro final de `vec` |
+| `Vector.pop(vec)` | Remove o último elemento |
+| `Vector.get(vec, pos)` | Retorna ponteiro pro elemento na posição `pos` |
+| `Vector.set(vec, pos, &val)` | Sobrescreve o valor na posição `pos` |
+| `Vector.in(vec, &val)` | Retorna `true` se o valor existir (usa `memcmp`) |
 
 ---
 
-## Macro utilitária
+## Iterador
 
 ```c
-// Itera sobre todos os elementos do vetor
-VECTOR_FOR_EACH(vec, int, item, {
-    printf("%d\n", *item);
-});
+// Criar iterador
+__it__Vector* it = Vector.begin(vec);
+__it__Vector* end = Vector.end(vec);
 
-// Tamanho atual
-len(vec); // equivale a vec->__size
-```
-
----
-
-## Exemplo completo
-
-```c
-Vector* vec = newVector();
-vec->__init__(vec, sizeof(int));
-
-for (int i = 0; i < 10; i++) {
-    vec = appendVector(vec, &i);
+// Iterar
+while (it->__pos != end->__pos) {
+    int* val = (int*)Vector.getIterator(it);
+    printf("%d\n", *val);
+    Vector.next(it);
 }
 
-VECTOR_FOR_EACH(vec, int, item, {
-    printf("%d\n", *item);
-});
+// Liberar
+free(it);
+free(end);
+```
 
-freeVector(vec);
+| Função | Descrição |
+|--------|-----------|
+| `Vector.begin(vec)` | Cria iterador apontando pro primeiro elemento |
+| `Vector.end(vec)` | Cria iterador apontando após o último elemento |
+| `Vector.next(it)` | Avança o iterador uma posição |
+| `Vector.prev(it)` | Recua o iterador uma posição |
+| `Vector.getIterator(it)` | Retorna ponteiro pro elemento atual |
+| `Vector.setIterator(it, pos)` | Move o iterador para uma posição arbitrária |
+
+---
+
+## `__is_ptr` — modo ponteiro
+
+Quando `__is_ptr = true`, `get` e `getIterator` desreferenciam automaticamente o ponteiro guardado:
+
+```c
+// sem is_ptr: recebe void* apontando pro buffer interno
+// com is_ptr: recebe diretamente o ponteiro guardado
+Token* t = (Token*)Vector.get(vec, 0); // já desreferenciado!
+```
+
+---
+
+## Macros utilitárias
+
+```c
+len(vec)          // vec->__size
+capacity(vec)     // vec->__capacity
+size_value(vec)   // vec->__size_value
 ```
 
 ---
 
 ## Observações
 
-- O vetor começa com capacidade para **8 elementos** e dobra quando necessário.
+- O vector começa com capacidade para **8 elementos** e dobra quando necessário.
 - Todas as funções validam `NULL` e imprimem mensagens de erro descritivas.
-- Não há verificação de tipo em tempo de compilação — é responsabilidade do usuário passar o tipo correto.
+- `Vector_t Vector` é definido em `vector.c` — o header expõe apenas `extern Vector_t Vector`.
+- Os dois vetores precisam ter o mesmo `__size_value` para usar `extend`.
+- Não há verificação de tipo em tempo de compilação — responsabilidade do usuário passar o tipo correto.
+- Iteradores alocam memória com `malloc` — lembre de dar `free` após o uso.
