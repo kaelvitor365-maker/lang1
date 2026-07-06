@@ -100,7 +100,7 @@ VectorIterator* it = Vector.begin(vec);
 VectorIterator* end = Vector.end(vec);
 
 // Iterar
-for(VectorIterator it = Vector.begin(vec); it->__pos != Vector.end(vec)->__pos; it = Vector.next(it));
+for(VectorIterator it = Vector.begin(vec); it->__pos != end->__pos; it = Vector.next(it));
 
 // Liberar
 free(it);
