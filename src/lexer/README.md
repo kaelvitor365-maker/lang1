@@ -59,6 +59,24 @@ freeLexer(lexer);
 
 ---
 
+## macro utilitaria
+
+| macro | descrição |
+|-------|-----------|
+| `WITH_LEXER()` | gera um condigo que abre e fecha automaticamente o lexer |
+
+---
+
+### Exemplo
+``` c
+WITH_LEXER(lex, "main.lang", {
+    for(size_t i = 0; i < len(lex); ++i){
+        Token* token = VectorF.get(lex, i);
+        log_token(token);
+    }
+});
+```
+
 ## Tokenização completa
 
 Para enviar os tokens para o parser, todos os tokens podem ser armazenados em um `Vector<Token*>`.
