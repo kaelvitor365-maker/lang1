@@ -108,3 +108,7 @@ Token* Lexer__LexerNext(Lexer* this);
 /// @param this Ponteiro para o Lexer
 /// @return Ponteiro para o Vector<Token*>, ou NULL se falhar.
 _Vector* LexerVector(Lexer* this);
+
+/// @brief Imprime as informações de um Token para depuração.
+/// @param token Ponteiro para o Token a ser exibido.
+void log_token(Token* token);

@@ -299,3 +299,236 @@ _Vector* LexerVector(Lexer* this){
     }
     return vector;
 }
+
+#include "lexer.h"
+#include <stdio.h>
+
+void log_token(Token* token){
+    if(token == NULL){
+        printf("[NULL TOKEN]\n");
+        return;
+    }
+
+    printf("Line: %zu | ", token->line);
+
+    if(token->type == TOKEN_IDENTIFIER){
+        printf("[IDENTIFIER] -> %s\n", token->word);
+        return;
+    }
+
+    if(token->type == TOKEN_NUMBER){
+        printf("[NUMBER] -> %s\n", token->word);
+        return;
+    }
+
+    if(token->type == TOKEN_STR){
+        printf("[STRING] -> \"%s\"\n", token->word);
+        return;
+    }
+
+    if(token->type == TOKEN_BOOL){
+        printf("[BOOL] -> %s\n", token->word);
+        return;
+    }
+
+    if(token->type == TOKEN_EQEQ){
+        printf("[EQUAL EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_GTEQ){
+        printf("[GT EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_LTEQ){
+        printf("[LT EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_NOTEQ){
+        printf("[NOT EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_ANDAND){
+        printf("[AND AND]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_OROR){
+        printf("[OR OR]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_PLUSEQ){
+        printf("[PLUS EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_MINUSEQ){
+        printf("[MINUS EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_MULEQ){
+        printf("[MUL EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_DIVEQ){
+        printf("[DIV EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_LSHIFT){
+        printf("[LT LT]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_RSHIFT){
+        printf("[GT GT]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_LSHIFTEQ){
+        printf("[LT LT EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_RSHIFTEQ){
+        printf("[GT GT EQUAL]\n");
+        return;
+    }
+
+
+    if(token->type == TOKEN_MAIN){
+        printf("[MAIN]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_FUNC){
+        printf("[FUNCTION]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_RET){
+        printf("[RETURN]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_VAR){
+        printf("[VAR]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_IF){
+        printf("[IF]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_ELSE){
+        printf("[ELSE]\n");
+        return;
+    }
+
+
+    if(token->type == TOKEN_PLUS){
+        printf("[PLUS]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_MINUS){
+        printf("[MINUS]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_MUL){
+        printf("[MUL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_DIV){
+        printf("[DIV]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_EQUAL){
+        printf("[EQUAL]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_GT){
+        printf("[GT]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_LT){
+        printf("[LT]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_NOT){
+        printf("[NOT]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_AND){
+        printf("[AND]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_OR){
+        printf("[OR]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_XOR){
+        printf("[XOR]\n");
+        return;
+    }
+
+
+    if(token->type == TOKEN_LPAREN){
+        printf("[LPAREN]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_RPAREN){
+        printf("[RPAREN]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_LBRACE){
+        printf("[LBRACE]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_RBRACE){
+        printf("[RBRACE]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_LBRACKET){
+        printf("[LBRACKET]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_RBRACKET){
+        printf("[RBRACKET]\n");
+        return;
+    }
+
+    if(token->type == TOKEN_SEMICOLON){
+        printf("[SEMICOLON]\n");
+        return;
+    }
+
+
+    if(token->type == TOKEN_EOF){
+        printf("[EOF]\n");
+        return;
+    }
+
+    printf("[UNKNOWN TOKEN] -> %s\n", token->word);
+}

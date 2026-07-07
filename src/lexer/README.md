@@ -48,7 +48,7 @@ Ler tokens individualmente:
 for(;;){
     Token* token = Lexer__LexerNext(lexer);
 
-    // usar token
+    log_token(token);
 
     if(token->type == TOKEN_EOF)
         break;
@@ -235,6 +235,7 @@ TOKEN_EOF
 | `freeLexer(lexer)` | Libera o lexer e o buffer interno |
 | `Lexer__LexerNext(lexer)` | Retorna o próximo token |
 | `LexerVector(lexer)` | Gera um vector contendo todos os tokens |
+| `log_token(token)` | imprime o token na tela |
 
 ---
 
