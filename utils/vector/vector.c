@@ -34,6 +34,7 @@ void Vector__del__(_Vector* this){
         return;
     }
     free(this->__data);
+    this->__data = NULL;
     this->__size_value = 0;
     this->__capacity = 0;
     this->__size = 0;
@@ -140,16 +141,13 @@ __it__Vector* Vector__itBegin(_Vector* this){
     return it;
 }
 
-__it__Vector* Vector__itEnd(_Vector* this){
+void* Vector__itEnd(_Vector* this){
     if(this == NULL){ printf("end(THIS IS NULL)\n"); return NULL; }
+
     if(this->__data == NULL){ printf("NEED START THE VECTOR WITH .__init__()\n"); return NULL; }
-    __it__Vector* it = malloc(sizeof(__it__Vector));
-    if(it == NULL){ printf("MALLOC ERROR\n"); return NULL; }
-    it->__data = this->__data;
-    it->__pos = CAST_TO(char*, this->__data) + (this->__size * this->__size_value);
-    it->__size_value = this->__size_value;
-    it->__is_ptr = this->__is_ptr;
-    return it;
+
+
+    return CAST_TO(char*, this->__data) + (this->__size * this->__size_value);
 }
 
 __it__Vector* Vector__itNext(__it__Vector* this){

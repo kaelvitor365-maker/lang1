@@ -7,7 +7,7 @@ Array dinâmico genérico em C, inspirado no `vector<T>` do C++. Usa `void*` par
 ## Estruturas
 
 ### `_Vector` (interna)
-```c
+```cgit a
 CLASS(_Vector, {
     void*  __data;        // buffer interno
     size_t __size;        // quantidade atual de elementos
@@ -42,11 +42,11 @@ extern _Vector_t VectorF;
 
 ```c
 // Criar (elementos por valor)
-Vector* vec = Vector.new();
+Vector* vec = VectorF.new();
 vec->__init__(false, vec, sizeof(int));
 
 // Criar (elementos por ponteiro)
-Vector* vec = Vector.new();
+Vector* vec = VectorF.new();
 vec->__init__(true, vec, sizeof(void*));
 
 // Adicionar
@@ -80,7 +80,7 @@ VectorF.free(vec);
 
 | Função | Descrição |
 |--------|-----------|
-| `Vector.new()` | Aloca a struct. Chame `__init__` antes de usar. |
+| `VectorF.new()` | Aloca a struct. Chame `__init__` antes de usar. |
 | `vec->__init__(is_ptr, vec, sizeof(T))` | Inicializa o buffer com capacidade para 8 elementos |
 | `VectorF.free(vec)` | Libera buffer interno e a struct |
 | `VectorF.append(vec, &val)` | Adiciona elemento no final, cresce automaticamente |
@@ -99,7 +99,7 @@ VectorF.free(vec);
 VectorIterator* it = VectorF.begin(vec);
 
 // Iterar
-for(VectorIterator it = Vector.begin(vec); it->__pos != vectorF->end(vec); it = Vector.next(it));
+for(VectorIterator it = VectorF.begin(vec); it->__pos != VectorF.end(vec); it = VectorF.next(it));
 
 // Liberar
 free(it);
