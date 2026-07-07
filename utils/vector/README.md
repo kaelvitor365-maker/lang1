@@ -123,7 +123,7 @@ Quando `__is_ptr = true`, `get` e `getIterator` desreferenciam automaticamente o
 ```c
 // sem is_ptr: recebe void* apontando pro buffer interno
 // com is_ptr: recebe diretamente o ponteiro guardado
-Token* t = (Token*)Vector.get(vec, 0); // já desreferenciado!
+Token* t = (Token*)VectorF.get(vec, 0); // já desreferenciado!
 ```
 
 ---
