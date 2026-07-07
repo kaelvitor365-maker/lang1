@@ -7,7 +7,7 @@ Array dinâmico genérico em C, inspirado no `vector<T>` do C++. Usa `void*` par
 ## Estruturas
 
 ### `_Vector` (interna)
-```c
+```cgit a
 CLASS(_Vector, {
     void*  __data;        // buffer interno
     size_t __size;        // quantidade atual de elementos

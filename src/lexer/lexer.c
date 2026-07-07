@@ -67,6 +67,23 @@ static inline void skipSpaceLexer(Lexer* this){
     }
 }
 
+static inline void skipCommentLineLexer(Lexer* this){
+    while(peekLexer(this) != '\0' && peekLexer(this) != '\n'){
+        advanceLexer(this);
+    }
+}
+
+static inline void skipCommentMultLineLexer(Lexer* this){
+    while(peekLexer(this) != '\0'){
+        if(peekLexer(this) == '*' && *(this->pos + 1) == '/'){
+            advanceLexer(this);
+            advanceLexer(this);
+            return;
+        }
+        advanceLexer(this);
+    }
+}
+
 static inline bool isNumber(char c){
     return c >= '0' && c <= '9';
 }
@@ -87,8 +104,6 @@ static inline bool matchChar(Lexer* this, char c, TokenType type, Token* token){
     if(*this->pos == c){
         token->line = this->line;
         token->type = type;
-        token->word[0] = c;
-        token->word[1] = '\0';
         advanceLexer(this);
         return true;
     }
@@ -158,11 +173,21 @@ Token* tokenIdentifier(Lexer* this, Token* token){
     return token;
 }
 
-#define MATCH_C(c, tok) if(matchChar(this, c, tok, token)) goto return_token;
-
+#define MATCH_C(c, tok) if(matchChar(this, c, tok, token))
 Token* Lexer__LexerNext(Lexer* this){
-    skipSpaceLexer(this);
-
+    for(;;){
+        skipSpaceLexer(this);
+        if(peekLexer(this) == '/' && *(this->pos + 1) == '/'){
+            skipCommentLineLexer(this);
+            continue;
+        }
+        if(peekLexer(this) == '/' && *(this->pos + 1) == '*'){
+            skipCommentMultLineLexer(this);
+            continue;
+        }
+        break;
+    }
+    
     Token* token = malloc(sizeof(Token));
     if(token == NULL) return NULL;
 
@@ -182,28 +207,76 @@ Token* Lexer__LexerNext(Lexer* this){
         goto return_token;
     }
 
-    MATCH_C('\0', TOKEN_EOF)
-    MATCH_C('+',  TOKEN_PLUS)
-    MATCH_C('-',  TOKEN_MINUS)
-    MATCH_C('*',  TOKEN_MUL)
-    MATCH_C('/',  TOKEN_DIV)
-    MATCH_C(':',  TOKEN_COLON)
-    MATCH_C(';',  TOKEN_SEMICOLON)
-    MATCH_C('.',  TOKEN_DOT)
-    MATCH_C('(',  TOKEN_LPAREN)
-    MATCH_C(')',  TOKEN_RPAREN)
-    MATCH_C('{',  TOKEN_LBRACE)
-    MATCH_C('}',  TOKEN_RBRACE)
-    MATCH_C('[',  TOKEN_LBRACKET)
-    MATCH_C(']',  TOKEN_RBRACKET)
-    MATCH_C('=',  TOKEN_EQUAL)
-    MATCH_C('>',  TOKEN_GT)
-    MATCH_C('<',  TOKEN_LT)
-    MATCH_C('!',  TOKEN_NOT)
-    MATCH_C('^',  TOKEN_XOR)
-    MATCH_C('|',  TOKEN_OR)
-    MATCH_C('~',  TOKEN_NOTB)
-    MATCH_C('&',  TOKEN_AND)
+    MATCH_C('\0', TOKEN_EOF) goto return_token;
+    MATCH_C('+',  TOKEN_PLUS){
+        MATCH_C('+', TOKEN_INC) goto return_token;
+        MATCH_C('=', TOKEN_PLUSEQ) goto return_token;
+        goto return_token;
+    }
+    MATCH_C('-',  TOKEN_MINUS){
+        MATCH_C('-', TOKEN_DEC) goto return_token;
+        MATCH_C('=', TOKEN_MINUSEQ) goto return_token;
+        goto return_token;
+    }
+    MATCH_C('*',  TOKEN_MUL){
+        MATCH_C('=', TOKEN_MULEQ) goto return_token;
+        goto return_token;
+    }
+    MATCH_C('/',  TOKEN_DIV){
+        MATCH_C('=', TOKEN_DIVEQ) goto return_token;
+        goto return_token;
+    }
+    MATCH_C(':',  TOKEN_COLON) goto return_token;
+    
+    MATCH_C(';',  TOKEN_SEMICOLON) goto return_token;
+
+    MATCH_C('.',  TOKEN_DOT) goto return_token;
+
+    MATCH_C('(',  TOKEN_LPAREN) goto return_token;
+
+    MATCH_C(')',  TOKEN_RPAREN) goto return_token;
+
+    MATCH_C('{',  TOKEN_LBRACE) goto return_token;
+
+    MATCH_C('}',  TOKEN_RBRACE) goto return_token;
+
+    MATCH_C('[',  TOKEN_LBRACKET) goto return_token;
+
+    MATCH_C(']',  TOKEN_RBRACKET) goto return_token;
+
+    MATCH_C('=',  TOKEN_EQUAL){
+        MATCH_C('=', TOKEN_EQEQ) goto return_token;
+        goto return_token;
+    }
+    MATCH_C('>',  TOKEN_GT){
+        MATCH_C('=', TOKEN_GTEQ) goto return_token;
+        MATCH_C('>', TOKEN_RSHIFT){
+            MATCH_C('=', TOKEN_RSHIFTEQ) goto return_token;
+            goto return_token;
+        }
+        goto return_token;
+    }
+    MATCH_C('<',  TOKEN_LT){
+        MATCH_C('=', TOKEN_LTEQ) goto return_token;
+        MATCH_C('<', TOKEN_LSHIFT){
+            MATCH_C('=', TOKEN_LSHIFTEQ) goto return_token;
+        }
+        goto return_token;
+    }
+    MATCH_C('!',  TOKEN_NOT) goto return_token;
+
+    MATCH_C('^',  TOKEN_XOR) goto return_token;
+
+    MATCH_C('|',  TOKEN_OR){
+        MATCH_C('|', TOKEN_OROR) goto return_token;
+        goto return_token;
+    }
+    MATCH_C('~',  TOKEN_NOTB) goto return_token;
+
+    MATCH_C('&',  TOKEN_AND){
+        MATCH_C('&', TOKEN_ANDAND) goto return_token;
+        goto return_token;
+    }
 
     token->line = this->line;
     token->type = TOKEN_UNDEFINED;
