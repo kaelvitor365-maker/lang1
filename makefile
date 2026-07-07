@@ -12,4 +12,6 @@ all:
 	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
 
 run:
+	mkdir -p build
+	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
 	./build/lang

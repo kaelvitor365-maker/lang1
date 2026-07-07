@@ -12,7 +12,7 @@ _Vector* Vector__resize(_Vector* this){
     return this;
 }
 
-void Vector__init__(bool is_ptr, _Vector* this, const size_t size_value){
+void Vector__init__(bool is_ptr, _Vector* this, size_t size_value){
     if(this == NULL){
         printf("__INIT__(THE VECTOR IS NULL) this == NULL\n");
         return;

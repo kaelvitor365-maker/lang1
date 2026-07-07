@@ -107,16 +107,7 @@ void* freeLexer(Lexer* this);
  */
 Token* Lexer__LexerNext(Lexer* this);
 
-/**
- * @brief Tokeniza o arquivo inteiro e retorna um Vector de tokens brutos.
- * @param this Ponteiro para o Lexer
- * @return Ponteiro para o Vector de Token*, ou NULL se falhar.
- */
-_Vector* Lexer__Tokenize(Lexer* this);
-
-/**
- * @brief Combina tokens brutos em tokens compostos (pass 2).
- * @param arr Vector de tokens brutos gerado pelo Lexer__Tokenize
- * @return Ponteiro para o novo Vector de tokens refinados.
- */
-_Vector* Lexer__TransformTokens(_Vector* arr);
+/// @brief Tokeniza o arquivo inteiro e retorna um Vector de tokens brutos.
+/// @param this Ponteiro para o Lexer
+/// @return Ponteiro para o Vector<Token*>, ou NULL se falhar.
+_Vector* LexerVector(Lexer* this);

@@ -286,3 +286,16 @@ Token* Lexer__LexerNext(Lexer* this){
 return_token:
     return token;
 }
+
+_Vector* LexerVector(Lexer* this){
+    _Vector* vector = VectorF.new();
+    if(vector == NULL) return NULL;
+    vector->__init__(true, vector, sizeof(Token*));
+
+    for(;;){
+        Token* token = Lexer__LexerNext(this);
+        vector = VectorF.append(vector, &token);
+        if(token->type == TOKEN_EOF) break;
+    }
+    return vector;
+}
