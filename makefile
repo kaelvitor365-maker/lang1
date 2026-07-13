@@ -1,17 +1,51 @@
-SRC = 	src/lexer/lexer.c \
+SRC := 	src/lexer/lexer.c \
 		src/parser/parser.c \
 		src/ast/ast.c \
-		src/eval/eval.c
+		src/eval/eval.c 
+UTILS := utils/vector/vector.c
+MAIN := main.c
 
-UTILS = utils/vector/vector.c
+CSYSTEMFLAGS := -Wall \
+				-Wextra\
+				-Werror\
+				-g
+CBUILDFLAGS := 	-Iutils\
+				-Iutils/vector \
+				-Iutils/defines \
+				-Isrc \
+				-Isrc/lexer \
+				-Isrc/parser \
+				-Isrc/ast \
+				-Isrc/eval
 
-CFLAGS = -Isrc -Iutils -Iutils/defines -Iutils/vector -Wall -Wextra
 
-all:
-	mkdir -p build
-	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
+SRCS := $(SRC) $(UTILS) $(MAIN)
+OBJS := $(SRCS:%.c=build/%.o)
 
-run:
-	mkdir -p build
-	gcc $(CFLAGS) main.c $(SRC) $(UTILS) -o build/lang
-	./build/lang
+TARGET := build/lang
+
+CC = gcc
+
+.PHONY: all run clean
+
+all: $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET) $(ARGS)
+
+$(TARGET): $(OBJS)
+	@echo "Linking $@"
+	@$(CC) $(CSYSTEMFLAGS) $(CBUILDFLAGS) $^ -o $@
+
+build/%.o: %.c
+	@mkdir -p $(dir $@)
+	@echo "Compiling $<"
+	@$(CC) $(CSYSTEMFLAGS) $(CBUILDFLAGS) -c $< -o $@
+
+clean:
+	@echo "Cleaing up..."
+	@rm -rf build
+
+
+
+
