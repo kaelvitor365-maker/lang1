@@ -1,15 +1,18 @@
-SRC := 	src/lexer/lexer.c \
+SRC := 	\
+		src/lexer/lexer.c \
 		src/parser/parser.c \
 		src/ast/ast.c \
 		src/eval/eval.c 
 UTILS := utils/vector/vector.c
 MAIN := main.c
 
-CSYSTEMFLAGS := -Wall \
+CSYSTEMFLAGS := \
+				-Wall \
 				-Wextra\
 				-Werror\
 				-g
-CBUILDFLAGS := 	-Iutils\
+CBUILDFLAGS :=	\
+				-Iutils\
 				-Iutils/vector \
 				-Iutils/defines \
 				-Isrc \
