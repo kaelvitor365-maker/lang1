@@ -12,6 +12,10 @@
 
 class Lexer {
     public:
+        Token nextToken();
+
+        Token peekToken();
+
         explicit Lexer(const std::filesystem::path& path) :
             one_character{
                 {'+', TokenType::TOKEN_PLUS},
@@ -105,9 +109,7 @@ class Lexer {
 
         ~Lexer() = default;
 
-        Token nextToken();
 
-        Token peekToken();
 
     private:
         Token scanToken();
