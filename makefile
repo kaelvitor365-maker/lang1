@@ -1,35 +1,32 @@
-SRC := 	\
-		src/lexer/lexer.c \
-		src/parser/parser.c \
-		src/ast/ast.c \
-		src/eval/eval.c 
-UTILS := utils/vector/vector.c
-MAIN := main.c
-
-CSYSTEMFLAGS := \
-				-Wall \
-				-Wextra\
-				-Werror\
-				-g
-CBUILDFLAGS :=	\
-				-Iutils\
-				-Iutils/vector \
-				-Iutils/defines \
-				-Isrc \
-				-Isrc/lexer \
-				-Isrc/parser \
-				-Isrc/ast \
-				-Isrc/eval
-
-
-SRCS := $(SRC) $(UTILS) $(MAIN)
-OBJS := $(SRCS:%.c=build/%.o)
+CXX := g++
 
 TARGET := build/lang
 
-CC = gcc
+SRC := \
+	src/lexer/lexer.cpp \
+	src/lexer/lexer_utils.cpp \
+	src/parser/parser.cpp \
+	src/ast/ast.cpp \
+	src/eval/eval.cpp \
+	main.cpp
 
-.PHONY: all run clean
+OBJS := $(patsubst %.cpp,build/%.o,$(SRC))
+
+CXXFLAGS := \
+	-std=c++20 \
+	-Wall \
+	-Wextra \
+	-Werror \
+	-g \
+	-Iincludes \
+	-Iincludes/lexer \
+	-Isrc \
+	-Isrc/lexer \
+	-Isrc/parser \
+	-Isrc/ast \
+	-Isrc/eval
+
+.PHONY: all run clean rebuild
 
 all: $(TARGET)
 
@@ -38,17 +35,16 @@ run: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@echo "Linking $@"
-	@$(CC) $(CSYSTEMFLAGS) $(CBUILDFLAGS) $^ -o $@
-
-build/%.o: %.c
 	@mkdir -p $(dir $@)
+	@$(CXX) $(OBJS) -o $@
+
+build/%.o: %.cpp
 	@echo "Compiling $<"
-	@$(CC) $(CSYSTEMFLAGS) $(CBUILDFLAGS) -c $< -o $@
+	@mkdir -p $(dir $@)
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@echo "Cleaing up..."
+	@echo "Cleaning..."
 	@rm -rf build
 
-
-
-
+rebuild: clean all

@@ -3,13 +3,18 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
+                "${workspaceFolder}/includes",
+                "${workspaceFolder}/includes/lexer",
                 "${workspaceFolder}/src",
-                "${workspaceFolder}/utils",
-                "${workspaceFolder}/utils/vector",
-                "${workspaceFolder}/utils/defines"
+                "${workspaceFolder}/src/lexer",
+                "${workspaceFolder}/src/parser",
+                "${workspaceFolder}/src/ast",
+                "${workspaceFolder}/src/eval"
             ],
-            "compilerPath": "/usr/bin/gcc"
+            "compilerPath": "/usr/bin/g++",
+            "cppStandard": "c++20",
+            "cStandard": "c17",
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4
