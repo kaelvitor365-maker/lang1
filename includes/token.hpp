@@ -1,3 +1,5 @@
+#pragma once
+
 #include <variant>
 #include <cstdint>
 #include <string>
@@ -27,6 +29,10 @@ enum class TokenType {
     TOKEN_IDENTIFIER,
     TOKEN_BOOL,
 
+    // Boolean
+    TOKEN_TRUE,
+    TOKEN_FALSE,
+    
     // Arithmetic
     TOKEN_PLUS,
     TOKEN_INC,

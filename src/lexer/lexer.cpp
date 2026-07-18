@@ -109,6 +109,13 @@ Token Lexer::scanToken(){
             ++this->it;
         }
         if(!this->keywords.contains(word)){
+
+            if(word == "true" || word == "false"){
+                token.type = TokenType::TOKEN_BOOL;
+                token.value = word == "true";
+                return token;
+            }
+
             token.type = TokenType::TOKEN_IDENTIFIER;
             token.value = word;
             return token;

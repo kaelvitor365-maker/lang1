@@ -20,6 +20,7 @@ CXXFLAGS := \
 	-g \
 	-Iincludes \
 	-Iincludes/lexer \
+	-Iincludes/ast \
 	-Isrc \
 	-Isrc/lexer \
 	-Isrc/parser \
