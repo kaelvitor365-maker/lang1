@@ -5,8 +5,10 @@
 #include <string>
 #include <cstddef>
 
+/// @brief Represents all token categories recognized by the lexer.
 enum class TokenType {
-    // Keywords
+    /// @name Keywords
+    /// @{
     TOKEN_MAIN,
     TOKEN_FUNC,
     TOKEN_RETURN,
@@ -22,48 +24,62 @@ enum class TokenType {
 
     TOKEN_BREAK,
     TOKEN_CONTINUE,
+    /// @}
 
-    // Literals
+    /// @name Literals
+    /// @{
     TOKEN_NUMBER,
     TOKEN_STRING,
     TOKEN_IDENTIFIER,
     TOKEN_BOOL,
+    /// @}
 
-    // Boolean
+    /// @name Boolean literals
+    /// @{
     TOKEN_TRUE,
     TOKEN_FALSE,
-    
-    // Arithmetic
+    /// @}
+
+    /// @name Arithmetic operators
+    /// @{
     TOKEN_PLUS,
     TOKEN_INC,
     TOKEN_DEC,
     TOKEN_MINUS,
     TOKEN_MUL,
     TOKEN_DIV,
+    /// @}
 
-    // Assignment
+    /// @name Assignment operators
+    /// @{
     TOKEN_EQUAL,
     TOKEN_PLUSEQ,
     TOKEN_MINUSEQ,
     TOKEN_MULEQ,
     TOKEN_DIVEQ,
+    /// @}
 
-    // Comparison
+    /// @name Comparison operators
+    /// @{
     TOKEN_GT,
     TOKEN_LT,
     TOKEN_GTEQ,
     TOKEN_LTEQ,
     TOKEN_EQEQ,
     TOKEN_NOTEQ,
+    /// @}
 
-    // Logical
+    /// @name Logical operators
+    /// @{
     TOKEN_AND,
     TOKEN_ANDAND,
     TOKEN_OR,
     TOKEN_OROR,
     TOKEN_NOT,
+    /// @}
 
-    // Bitwise
+    /// @name Bitwise operators
+    /// @{
     TOKEN_XOR,
     TOKEN_NOTB,
     TOKEN_LSHIFT,
@@ -74,8 +90,10 @@ enum class TokenType {
     TOKEN_NOTBEQ,
     TOKEN_RSHIFTEQ,
     TOKEN_LSHIFTEQ,
+    /// @}
 
-    // Delimiters
+    /// @name Delimiters
+    /// @{
     TOKEN_LPAREN,
     TOKEN_RPAREN,
     TOKEN_LBRACE,
@@ -87,21 +105,37 @@ enum class TokenType {
     TOKEN_COLON,
     TOKEN_COMMA,
     TOKEN_DOT,
+    /// @}
 
-    // Special
+    /// @name Special tokens
+    /// @{
     TOKEN_EOF,
     TOKEN_INCOMPLETED_STRING,
     TOKEN_INVALID
+    /// @}
 };
 
+/// @brief Represents a lexical token produced by the lexer.
 class Token {
-    public:
-        TokenType type = TokenType::TOKEN_INVALID;
-        std::size_t line = 0;
-        std::variant<
-            std::monostate,
-            std::uint64_t,
-            std::string,
-            bool
-        > value{};
+public:
+
+    /// @brief Token category.
+    TokenType type = TokenType::TOKEN_INVALID;
+
+    /// @brief Source code line where the token was recognized.
+    std::size_t line = 0;
+
+    /// @brief Token value, when applicable.
+    ///
+    /// Supported types:
+    /// - std::monostate : token has no associated value.
+    /// - std::uint64_t  : numeric literal.
+    /// - std::string    : identifier or string literal.
+    /// - bool           : boolean literal.
+    std::variant<
+        std::monostate,
+        std::uint64_t,
+        std::string,
+        bool
+    > value{};
 };
