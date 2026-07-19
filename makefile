@@ -21,6 +21,7 @@ CXXFLAGS := \
 	-g \
 	-Iincludes \
 	-Iincludes/lexer \
+	-Iincludes/token \
 	-Iincludes/ast \
 	-Isrc \
 	-Isrc/lexer \
