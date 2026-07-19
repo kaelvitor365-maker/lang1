@@ -34,11 +34,7 @@ enum class TokenType {
     TOKEN_BOOL,
     /// @}
 
-    /// @name Boolean literals
-    /// @{
-    TOKEN_TRUE,
-    TOKEN_FALSE,
-    /// @}
+
 
     /// @name Arithmetic operators
     /// @{
