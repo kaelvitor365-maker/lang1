@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/includes",
                 "${workspaceFolder}/includes/lexer",
+                "${workspaceFolder}/includes/token",
                 "${workspaceFolder}/includes/ast",
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/src/lexer",
