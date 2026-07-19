@@ -6,6 +6,7 @@
 #include <functional>
 #include <array>
 #include <optional>
+#include <queue>
 #include "token.hpp"
 
 
@@ -29,7 +30,7 @@ class Lexer final{
             file.close();
             
             this->line = 0;
-            this->currentToken = this->scanToken();
+            this->scanToken();
 
         }
 
@@ -39,8 +40,13 @@ class Lexer final{
 
 
     private:
-        Token scanToken();
+        void scanToken();
         void skipSpaces();
+        Token string();
+        Token number();
+        Token alphaIdentfier();
+        void specialCharacters(std::string word_1);
+        void specialCharacters(std::string word_1, std::string word_2);
 
 
         std::unordered_map<char, TokenType> one_character{
@@ -95,7 +101,7 @@ class Lexer final{
             {"for", TokenType::TOKEN_FOR},
             {"do", TokenType::TOKEN_DO_WHILE},
             {"break", TokenType::TOKEN_BREAK},
-            {"continue", TokenType::TOKEN_CONTINUE},s
+            {"continue", TokenType::TOKEN_CONTINUE},
             {"func", TokenType::TOKEN_FUNC},
             {"return", TokenType::TOKEN_RETURN},
             {"main", TokenType::TOKEN_MAIN}
@@ -121,5 +127,5 @@ class Lexer final{
         std::string::const_iterator it;
         std::string::const_iterator end;
         std::size_t line;
-        Token currentToken; 
+        std::queue<Token> buffer;
 };

@@ -4,6 +4,7 @@ TARGET := build/lang
 
 SRC := \
 	src/lexer/lexer.cpp \
+	src/lexer/_lexer.cpp \
 	src/lexer/lexer_utils.cpp \
 	src/parser/parser.cpp \
 	src/ast/ast.cpp \
