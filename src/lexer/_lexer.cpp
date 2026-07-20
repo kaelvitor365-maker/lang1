@@ -17,36 +17,40 @@ void Lexer::skipSpaces(){
 
 Token Lexer::string(){
     std::string word;
-    Token token;
 
     ++this->it;
 
     if(this->it == this->end){
-        token.type = TokenType::TOKEN_INCOMPLETED_STRING;
-        token.value = "";
-        return token;
+        return Token{
+            .type = TokenType::TOKEN_INCOMPLETED_STRING,
+            .line = this->line,
+            .value = std::monostate{}
+        };
     }
 
 
     while(*this->it != '"'){
         if(this->it == this->end){
-            token.type = TokenType::TOKEN_INCOMPLETED_STRING;
-            token.value = word;
-            return token;
+            return Token{
+                .type = TokenType::TOKEN_INCOMPLETED_STRING,
+                .line = this->line,
+                .value = std::monostate{}
+            };
         }
         word.push_back(*(this->it++));
     }
 
     ++this->it;
 
-    token.type = TokenType::TOKEN_STRING;
-    token.value = word;
-    return token;
+    return Token{
+        .type = TokenType::TOKEN_STRING,
+        .line = this->line,
+        .value = std::move(word)
+    };
 }
 
 Token Lexer::number(){
     std::string word;
-    Token token;
 
     while(
         this->it != this->end &&
@@ -55,15 +59,17 @@ Token Lexer::number(){
         word.push_back(*this->it);
         ++it;
     }
-    token.type = TokenType::TOKEN_NUMBER;
-    token.value = static_cast<std::uint64_t>(std::stoull(word));
 
-    return token;
+
+    return Token{
+        .type = TokenType::TOKEN_NUMBER,
+        .line = this->line,
+        .value = static_cast<std::uint64_t>(std::stoull(word))
+    };
 }
 
 Token Lexer::alphaIdentfier(){
     std::string word;
-    Token token;
 
     while(
         this->it != this->end &&
@@ -75,21 +81,28 @@ Token Lexer::alphaIdentfier(){
     if(!this->keywords.contains(word)){
 
         if(word == "true" || word == "false"){
-            token.type = TokenType::TOKEN_BOOL;
-            token.value = word == "true";
-            return token;
+            return Token{
+                .type = TokenType::TOKEN_BOOL,
+                .line = this->line,
+                .value = word == "true"
+            };
         }
 
-        token.type = TokenType::TOKEN_IDENTIFIER;
-        token.value = word;
-        return token;
+        return Token{
+            .type = TokenType::TOKEN_IDENTIFIER,
+            .line = this->line,
+            .value = std::move(word)
+        };
     }
-    token.type = this->keywords.at(word);
-    return token;
+    return Token{
+        .type = this->keywords.at(word),
+        .line = this->line,
+        .value = std::monostate{}
+    };
 }
 
 void Lexer::specialCharacters(std::string word_1){
-
+    
     if(!word_1.empty()){
         auto result = this->functions[word_1.size() -1](word_1);
         if(result.has_value()){

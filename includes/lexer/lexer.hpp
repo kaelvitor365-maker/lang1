@@ -47,7 +47,7 @@ class Lexer final{
                 this->end = this->data.cend();
             file.close();
             
-            this->line = 0;
+            this->line = 1;
             this->scanToken();
 
         }
@@ -169,7 +169,8 @@ class Lexer final{
             {"continue", TokenType::TOKEN_CONTINUE},
             {"func", TokenType::TOKEN_FUNC},
             {"return", TokenType::TOKEN_RETURN},
-            {"main", TokenType::TOKEN_MAIN}
+            {"main", TokenType::TOKEN_MAIN},
+            {"var", TokenType::TOKEN_VAR}
         };
 
 

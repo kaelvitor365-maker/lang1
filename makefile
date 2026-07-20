@@ -9,6 +9,7 @@ SRC := \
 	src/parser/parser.cpp \
 	src/ast/ast.cpp \
 	src/eval/eval.cpp \
+	src/token/token.cpp \
 	main.cpp
 
 OBJS := $(patsubst %.cpp,build/%.o,$(SRC))

@@ -4,112 +4,11 @@
 #include <cstdint>
 #include <string>
 #include <cstddef>
-
-/// @brief Represents all token categories recognized by the lexer.
-enum class TokenType {
-    /// @name Keywords
-    /// @{
-    TOKEN_MAIN,
-    TOKEN_FUNC,
-    TOKEN_RETURN,
-
-    TOKEN_VAR,
-
-    TOKEN_IF,
-    TOKEN_ELSE,
-
-    TOKEN_WHILE,
-    TOKEN_DO_WHILE,
-    TOKEN_FOR,
-
-    TOKEN_BREAK,
-    TOKEN_CONTINUE,
-    /// @}
-
-    /// @name Literals
-    /// @{
-    TOKEN_NUMBER,
-    TOKEN_STRING,
-    TOKEN_IDENTIFIER,
-    TOKEN_BOOL,
-    /// @}
+#include <format>
+#include "_token.hpp"
 
 
 
-    /// @name Arithmetic operators
-    /// @{
-    TOKEN_PLUS,
-    TOKEN_INC,
-    TOKEN_DEC,
-    TOKEN_MINUS,
-    TOKEN_MUL,
-    TOKEN_DIV,
-    /// @}
-
-    /// @name Assignment operators
-    /// @{
-    TOKEN_EQUAL,
-    TOKEN_PLUSEQ,
-    TOKEN_MINUSEQ,
-    TOKEN_MULEQ,
-    TOKEN_DIVEQ,
-    /// @}
-
-    /// @name Comparison operators
-    /// @{
-    TOKEN_GT,
-    TOKEN_LT,
-    TOKEN_GTEQ,
-    TOKEN_LTEQ,
-    TOKEN_EQEQ,
-    TOKEN_NOTEQ,
-    /// @}
-
-    /// @name Logical operators
-    /// @{
-    TOKEN_AND,
-    TOKEN_ANDAND,
-    TOKEN_OR,
-    TOKEN_OROR,
-    TOKEN_NOT,
-    /// @}
-
-    /// @name Bitwise operators
-    /// @{
-    TOKEN_XOR,
-    TOKEN_NOTB,
-    TOKEN_LSHIFT,
-    TOKEN_RSHIFT,
-    TOKEN_ANDEQ,
-    TOKEN_OREQ,
-    TOKEN_XOREQ,
-    TOKEN_NOTBEQ,
-    TOKEN_RSHIFTEQ,
-    TOKEN_LSHIFTEQ,
-    /// @}
-
-    /// @name Delimiters
-    /// @{
-    TOKEN_LPAREN,
-    TOKEN_RPAREN,
-    TOKEN_LBRACE,
-    TOKEN_RBRACE,
-    TOKEN_LBRACKET,
-    TOKEN_RBRACKET,
-
-    TOKEN_SEMICOLON,
-    TOKEN_COLON,
-    TOKEN_COMMA,
-    TOKEN_DOT,
-    /// @}
-
-    /// @name Special tokens
-    /// @{
-    TOKEN_EOF,
-    TOKEN_INCOMPLETED_STRING,
-    TOKEN_INVALID
-    /// @}
-};
 
 /// @brief Represents a lexical token produced by the lexer.
 class Token {
@@ -135,3 +34,55 @@ public:
         bool
     > value{};
 };
+
+
+namespace std{
+
+    template <>
+    struct formatter<Token> {
+
+        constexpr auto parse(std::format_parse_context& ctx){
+            return ctx.begin();
+        }
+
+
+        auto format(const Token& token, std::format_context& ctx) const{
+
+            return std::visit(
+                [&](auto&& value){
+
+                    if constexpr(std::is_same_v<std::decay_t<decltype(value)>, std::monostate>){
+                        return std::format_to(
+                            ctx.out(),
+                            "{} [line: {}]",
+                            details::token_names[
+                                static_cast<std::size_t>(token.type)
+                            ],
+                            token.line
+                        );
+                    }
+                    else{
+                        return std::format_to(
+                            ctx.out(),
+                            "{}({}) [line: {}]",
+                            details::token_names[
+                                static_cast<std::size_t>(token.type)
+                            ],
+                            value,
+                            token.line
+                        );
+                    }
+
+                },
+                token.value
+            );
+        }
+    };
+
+}
+
+/// @brief 
+/// @param os 
+/// @param token 
+/// @return 
+std::ostream& operator<<(std::ostream& os, const Token& token);
