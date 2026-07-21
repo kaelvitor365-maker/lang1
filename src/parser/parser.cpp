@@ -27,51 +27,11 @@ void Parser::consume(TokenType token){
 }
 
 Node Parser::expression(){
-    return this->primary();
+    return this->term();
 }
 
-Node Parser::primary(){
 
-    if(this->match(TokenType::TOKEN_LPAREN)){
-        Node node = expression();
-        consume(TokenType::TOKEN_RPAREN);
 
-        return node;
-    }
 
-    if(this->check(TokenType::TOKEN_BOOL)){
-        auto boolean = std::get<bool>(this->current.value);
-        advance();
 
-        return Node{
-            expr::Boolean{boolean}
-        };
-    }
 
-    if(this->check(TokenType::TOKEN_NUMBER)){
-        auto number = std::get<std::uint64_t>(this->current.value);
-        advance();
-
-        return Node{
-            expr::Number{number}
-        };
-    }
-    if(this->check(TokenType::TOKEN_STRING)){
-        auto str = std::move(std::get<std::string>(this->current.value));
-        advance();
-
-        return Node{
-            expr::String{std::move(str)}
-        };
-    }
-    if(this->check(TokenType::TOKEN_IDENTIFIER)){
-        auto str = std::move(std::get<std::string>(this->current.value));
-        advance();
-
-        return Node{
-            expr::Identifier{std::move(str)}
-        };
-    }
-    
-    throw std::runtime_error("Expected Expression");
-}

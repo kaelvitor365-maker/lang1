@@ -6,35 +6,70 @@
 
 struct Node;
 
-namespace expr {
-    struct Number final{
-        std::uint64_t number;
-        Number(std::uint64_t number) : number(number) {}
-    };
-    struct String final{
-        std::string str;
-        String(std::string str) : str(std::move(str)) {}
-    };
-    struct Identifier final{
-        std::string name;
-        Identifier(std::string name) : name(std::move(name)) {}
-    };
+namespace ast {
+    struct Number final {};
+    struct String final {};
+    struct Identifier final {};
+    struct Boolean final {};
+    struct Binary final {};
+    struct Unary final {};
+}
+template <typename T>
+struct Expr {};
 
-    struct Boolean final{
-        bool boolean;
-        Boolean(bool boolean) : boolean(boolean) {}
-    };
-    struct Binary final{
-        TokenType operation;
-        std::unique_ptr<Node> left;
-        std::unique_ptr<Node> right;
-        Binary(TokenType operation, std::unique_ptr<Node> left, std::unique_ptr<Node> right) :
-            operation(operation), left(std::move(left)), right(std::move(right)) {}
-    };
-    struct Unary final{
-        TokenType operation;
-        std::unique_ptr<Node> expression;
-        Unary (TokenType operation, std::unique_ptr<Node> expression) :
-            operation(operation), expression(std::move(expression)) {}
-    };
+template <>
+struct Expr<ast::Number> {
+    std::uint64_t number;
+    std::size_t line;
+    Expr(std::uint64_t number, std::size_t line) :
+        number(number), line(line)
+    {}
 };
+
+template <>
+struct Expr<ast::String> {
+    std::string str;
+    std::size_t line;
+    Expr(std::string str, std::size_t line) :
+        str(std::move(str)), line(line)
+    {}
+};
+
+template <>
+struct Expr<ast::Identifier> {
+    std::string name;
+    std::size_t line;
+    Expr(std::string name, std::size_t line) :
+        name(std::move(name)), line(line)
+    {}
+};
+
+template <>
+struct Expr<ast::Boolean> {
+    bool boolean;
+    std::size_t line;
+    Expr(bool boolean, std::size_t line) :
+        boolean(boolean), line(line)
+    {}
+};
+
+template <>
+struct Expr<ast::Unary> {
+    TokenType operation;
+    std::size_t line;
+    std::unique_ptr<Node> expression;
+    Expr(TokenType operation, std::size_t line, std::unique_ptr<Node> expression) :
+        operation(operation), line(line), expression(std::move(expression))
+    {}
+};
+
+template<>
+struct Expr<ast::Binary> {
+    TokenType operation;
+    std::size_t line;
+    std::unique_ptr<Node> left, right;
+    Expr(TokenType operation, std::size_t line, std::unique_ptr<Node> left, std::unique_ptr<Node> right) :
+        operation(operation), line(line), left(std::move(left)), right(std::move(right))
+    {}
+};
+

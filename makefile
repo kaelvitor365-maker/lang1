@@ -7,6 +7,10 @@ SRC := \
 	src/lexer/_lexer.cpp \
 	src/lexer/lexer_utils.cpp \
 	src/parser/parser.cpp \
+	src/parser/implements/primary.cpp \
+	src/parser/implements/unary.cpp \
+	src/parser/implements/factor.cpp \
+	src/parser/implements/term.cpp \
 	src/ast/ast.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \
@@ -27,6 +31,7 @@ CXXFLAGS := \
 	-Isrc \
 	-Isrc/lexer \
 	-Isrc/parser \
+	-Isrc/parser/implements \
 	-Isrc/ast \
 	-Isrc/eval
 

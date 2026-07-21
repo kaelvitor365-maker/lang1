@@ -9,12 +9,13 @@
 
 struct Node final{
     std::variant<
-        expr::Number,
-        expr::String,
-        expr::Identifier,
-        expr::Boolean,
-        expr::Binary,
-        expr::Unary
+        std::monostate,
+        Expr<ast::Number>,
+        Expr<ast::String>,
+        Expr<ast::Identifier>,
+        Expr<ast::Boolean>,
+        Expr<ast::Binary>,
+        Expr<ast::Unary>
     >value;
 
     template <typename T>

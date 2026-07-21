@@ -15,6 +15,10 @@ class Parser final {
 
     Node expression();
     Node primary();
+    Node unary();
+    Node factor();
+    Node term();
+    
     void advance();
     bool check(TokenType token);
     bool match(TokenType token);

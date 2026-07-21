@@ -2,13 +2,22 @@
 ```
 lang
 ├─ includes
-│  ├─ ast.hpp
+│  ├─ ast
+│  │  ├─ ast.hpp
+│  │  ├─ expr.hpp
+│  │  └─ node.hpp
 │  ├─ eval.hpp
 │  ├─ lexer
+│  │  ├─ README.md
 │  │  ├─ lexer.hpp
 │  │  └─ lexer_utils.hpp
 │  ├─ parser.hpp
-│  └─ token.hpp
+│  └─ token
+│     ├─ README.md
+│     ├─ _token.hpp
+│     └─ token.hpp
+├─ lang_arqs
+│  └─ test.lang
 ├─ main.cpp
 ├─ makefile
 └─ src
@@ -17,9 +26,17 @@ lang
    ├─ eval
    │  └─ eval.cpp
    ├─ lexer
+   │  ├─ _lexer.cpp
    │  ├─ lexer.cpp
    │  └─ lexer_utils.cpp
-   └─ parser
-      └─ parser.cpp
+   ├─ parser
+   │  ├─ implements
+   │  │  ├─ factor.cpp
+   │  │  ├─ primary.cpp
+   │  │  ├─ term.cpp
+   │  │  └─ unary.cpp
+   │  └─ parser.cpp
+   └─ token
+      └─ token.cpp
 
 ```

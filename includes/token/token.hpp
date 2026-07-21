@@ -33,6 +33,10 @@ public:
         std::string,
         bool
     > value{};
+
+    explicit operator bool(){
+        return this->type != TokenType::TOKEN_EOF;
+    }
 };
 
 

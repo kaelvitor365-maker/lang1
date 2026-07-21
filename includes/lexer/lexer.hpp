@@ -138,6 +138,7 @@ class Lexer final{
             {"--", TokenType::TOKEN_DEC},
             {"-=", TokenType::TOKEN_MINUSEQ},
             {"*=", TokenType::TOKEN_MULEQ},
+            {"=:", TokenType::TOKEN_INFERED_TYPE},
             {"/=", TokenType::TOKEN_DIVEQ},
             {"==", TokenType::TOKEN_EQEQ},
             {"!=", TokenType::TOKEN_NOTEQ},

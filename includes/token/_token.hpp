@@ -46,6 +46,7 @@ enum class TokenType {
     /// @name Assignment operators
     /// @{
     TOKEN_EQUAL,
+    TOKEN_INFERED_TYPE,
     TOKEN_PLUSEQ,
     TOKEN_MINUSEQ,
     TOKEN_MULEQ,
@@ -147,6 +148,7 @@ namespace details {
 
         // Assignment
         "TOKEN_EQUAL",
+        "TOKEN_INFERED_TYPE",
         "TOKEN_PLUSEQ",
         "TOKEN_MINUSEQ",
         "TOKEN_MULEQ",
