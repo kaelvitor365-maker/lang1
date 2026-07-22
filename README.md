@@ -34,6 +34,8 @@ lang
    │  │  ├─ bitwise.cpp
    │  │  ├─ comparison.cpp
    │  │  ├─ factor.cpp
+   │  │  ├─ logical.cpp
+   │  │  ├─ postfix.cpp
    │  │  ├─ primary.cpp
    │  │  ├─ term.cpp
    │  │  └─ unary.cpp

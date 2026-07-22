@@ -7,4 +7,5 @@ namespace ast {
     struct Boolean final {};
     struct Binary final {};
     struct Unary final {};
+    struct Call final {};
 }

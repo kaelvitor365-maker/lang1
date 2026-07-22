@@ -14,6 +14,7 @@ SRC := \
 	src/parser/implements/bitwise.cpp \
 	src/parser/implements/comparison.cpp\
 	src/parser/implements/logical.cpp \
+	src/parser/implements/postfix.cpp \
 	src/ast/ast.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \

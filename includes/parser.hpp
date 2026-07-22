@@ -15,6 +15,7 @@ class Parser final {
 
     Node expression();
     Node primary();
+    Node postfix();
     Node unary();
     Node factor();
     Node term();
@@ -26,6 +27,7 @@ class Parser final {
     bool check(TokenType token);
     bool match(TokenType token);
     void consume(TokenType token);
+    Node finishCall(Node callee, std::size_t line);
 
 
     Lexer& lexer;

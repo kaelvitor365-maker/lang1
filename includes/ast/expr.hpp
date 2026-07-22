@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <memory>
+#include <vector>
 #include "ast.hpp"
 #include "token.hpp"
 
@@ -64,6 +65,17 @@ struct Expr<ast::Binary> {
     std::unique_ptr<Node> left, right;
     Expr(TokenType operation, std::size_t line, std::unique_ptr<Node> left, std::unique_ptr<Node> right) :
         operation(operation), line(line), left(std::move(left)), right(std::move(right))
+    {}
+};
+
+template<>
+struct Expr<ast::Call> {
+    std::size_t line;
+    std::unique_ptr<Node> callee;
+    std::vector<std::unique_ptr<Node>> arguments;
+
+    Expr(std::size_t line, std::unique_ptr<Node> callee, std::vector<std::unique_ptr<Node>> arguments) :
+        line(line), callee(std::move(callee)), arguments(std::move(arguments))
     {}
 };
 

@@ -15,7 +15,8 @@ struct Node final{
         Expr<ast::Identifier>,
         Expr<ast::Boolean>,
         Expr<ast::Binary>,
-        Expr<ast::Unary>
+        Expr<ast::Unary>,
+        Expr<ast::Call>
     >value;
 
     template <typename T>
