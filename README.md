@@ -31,6 +31,8 @@ lang
    │  └─ lexer_utils.cpp
    ├─ parser
    │  ├─ implements
+   │  │  ├─ bitwise.cpp
+   │  │  ├─ comparison.cpp
    │  │  ├─ factor.cpp
    │  │  ├─ primary.cpp
    │  │  ├─ term.cpp

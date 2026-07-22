@@ -11,6 +11,9 @@ SRC := \
 	src/parser/implements/unary.cpp \
 	src/parser/implements/factor.cpp \
 	src/parser/implements/term.cpp \
+	src/parser/implements/bitwise.cpp \
+	src/parser/implements/comparison.cpp\
+	src/parser/implements/logical.cpp \
 	src/ast/ast.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \

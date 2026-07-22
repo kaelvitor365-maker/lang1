@@ -2,18 +2,12 @@
 
 #include <utility>
 #include <memory>
+#include "ast.hpp"
 #include "token.hpp"
 
 struct Node;
 
-namespace ast {
-    struct Number final {};
-    struct String final {};
-    struct Identifier final {};
-    struct Boolean final {};
-    struct Binary final {};
-    struct Unary final {};
-}
+
 template <typename T>
 struct Expr {};
 

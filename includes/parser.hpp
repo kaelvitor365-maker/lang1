@@ -18,6 +18,9 @@ class Parser final {
     Node unary();
     Node factor();
     Node term();
+    Node bitwise();
+    Node comparison();
+    Node logical();
     
     void advance();
     bool check(TokenType token);

@@ -27,7 +27,7 @@ void Parser::consume(TokenType token){
 }
 
 Node Parser::expression(){
-    return this->term();
+    return this->comparison();
 }
 
 
