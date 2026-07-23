@@ -16,8 +16,10 @@ struct Node final{
         Expr<ast::Boolean>,
         Expr<ast::Binary>,
         Expr<ast::Unary>,
-        Expr<ast::Call>
+        Expr<ast::Call>,
+        Expr<ast::EndOfFIle>
     >value;
+
 
     template <typename T>
     requires std::constructible_from<decltype(value), T>

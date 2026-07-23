@@ -59,5 +59,6 @@ Node Parser::primary(){
         };
     }
     
-    throw std::runtime_error("Expected Expression");
+
+    throw std::runtime_error("TOKEN ERRADO");
 }

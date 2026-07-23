@@ -1,5 +1,1 @@
-func: int main(){
-    var x:type = 10 + 20;
-    var z =: 10 + 20;
-    print(x);
-}
+10 + b - c("ola", mundo) * 2 & 7 == false

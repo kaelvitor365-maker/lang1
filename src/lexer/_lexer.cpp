@@ -18,7 +18,6 @@ void Lexer::skipSpaces(){
 Token Lexer::string(){
     std::string word;
 
-    ++this->it;
 
     if(this->it == this->end){
         return Token{
@@ -135,5 +134,10 @@ void Lexer::specialCharacters(std::string word_1){
 
 void Lexer::specialCharacters(std::string word_1, std::string word_2){
     this->specialCharacters(word_1);
-    this->specialCharacters(word_2);
+    if(word_2.size() == 1 && word_2[0] == '"'){
+        this->buffer.push(this->string());
+    }
+    else {
+        this->specialCharacters(word_2);
+    }
 }

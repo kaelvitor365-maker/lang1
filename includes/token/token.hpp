@@ -14,6 +14,7 @@
 class Token {
 public:
 
+
     /// @brief Token category.
     TokenType type = TokenType::TOKEN_INVALID;
 
@@ -79,6 +80,23 @@ namespace std{
 
                 },
                 token.value
+            );
+        }
+    };
+
+    template<>
+    struct formatter<TokenType> {
+        constexpr auto parse(std::format_parse_context& ctx) const{
+            return ctx.begin();
+        }
+
+        auto format(const TokenType token, std::format_context& ctx) const{
+            return std::format_to(
+                ctx.out(),
+                "{}",
+                details::token_names[
+                    static_cast<std::size_t>(token)
+                ]
             );
         }
     };

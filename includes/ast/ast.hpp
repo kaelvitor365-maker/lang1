@@ -8,4 +8,5 @@ namespace ast {
     struct Binary final {};
     struct Unary final {};
     struct Call final {};
+    struct EndOfFIle final {};
 }

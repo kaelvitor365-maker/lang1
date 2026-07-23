@@ -16,6 +16,7 @@ SRC := \
 	src/parser/implements/logical.cpp \
 	src/parser/implements/postfix.cpp \
 	src/ast/ast.cpp \
+	src/ast/print.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \
 	main.cpp
@@ -32,6 +33,7 @@ CXXFLAGS := \
 	-Iincludes/lexer \
 	-Iincludes/token \
 	-Iincludes/ast \
+	-Iincludes/ast/ASTprinter \
 	-Isrc \
 	-Isrc/lexer \
 	-Isrc/parser \
@@ -39,12 +41,14 @@ CXXFLAGS := \
 	-Isrc/ast \
 	-Isrc/eval
 
+
+FILE := lang_arqs/test.lang
 .PHONY: all run clean rebuild
 
 all: $(TARGET)
 
 run: $(TARGET)
-	./$(TARGET) $(ARGS)
+	./$(TARGET) $(FILE)
 
 $(TARGET): $(OBJS)
 	@echo "Linking $@"

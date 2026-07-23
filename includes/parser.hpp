@@ -33,3 +33,4 @@ class Parser final {
     Lexer& lexer;
     Token current;
 };
+

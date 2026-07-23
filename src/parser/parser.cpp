@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "parser.hpp"
 
 void Parser::advance(){
@@ -19,7 +20,15 @@ bool Parser::match(TokenType token){
 
 
 void Parser::consume(TokenType token){
+
     if(!check(token)){
+
+        std::cerr 
+            << "Expected: " << static_cast<int>(token)
+            << "\nGot: " << details::token_names[static_cast<std::size_t>(this->current.type)]
+            << "\nLine: " << current.line
+            << "\n";
+
         throw std::runtime_error("Unexpected token");
     }
 
@@ -28,6 +37,10 @@ void Parser::consume(TokenType token){
 
 Node Parser::expression(){
     return this->comparison();
+}
+
+Node Parser::parse(){
+    return this->expression();
 }
 
 

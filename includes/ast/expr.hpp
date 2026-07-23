@@ -79,3 +79,13 @@ struct Expr<ast::Call> {
     {}
 };
 
+template<>
+struct Expr<ast::EndOfFIle> {
+    std::size_t line;
+    TokenType token;
+
+    Expr(std::size_t line, TokenType token = TokenType::TOKEN_EOF) :
+        line(line), token(token)
+    {}
+};
+

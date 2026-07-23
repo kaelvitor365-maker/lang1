@@ -20,6 +20,7 @@ void Lexer::scanToken(){
 
     //STRING
     if(*this->it == '"'){
+        ++this->it;
         this->buffer.push(this->string());
         return;
     }
