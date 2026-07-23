@@ -22,3 +22,4 @@ Node Parser::unary(){
 
     return this->postfix();
 }
+

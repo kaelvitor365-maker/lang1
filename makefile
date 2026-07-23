@@ -48,7 +48,7 @@ FILE := lang_arqs/test.lang
 all: $(TARGET)
 
 run: $(TARGET)
-	./$(TARGET) $(FILE)
+	./$(TARGET) $(FLAG) $(FILE)
 
 $(TARGET): $(OBJS)
 	@echo "Linking $@"
