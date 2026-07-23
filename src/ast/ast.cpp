@@ -4,7 +4,7 @@
 std::string ast::details::printer::putSpace(){
     std::string word;
     for(std::size_t i = 0; i < this->spaces; ++i)
-        word.append(" |-");
+        word.append("   ");
     return word;
 }
 
