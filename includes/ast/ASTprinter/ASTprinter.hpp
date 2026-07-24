@@ -13,11 +13,7 @@ namespace ast::details {
 
         std::string operator()(const Node& node){
 
-            std::visit([&](auto&& value){
-                this->print(value);
-
-            },
-            node.value);
+            this->print(node);
 
             return str;
         }

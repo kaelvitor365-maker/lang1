@@ -10,3 +10,13 @@ namespace ast {
     struct Call final {};
     struct EndOfFIle final {};
 }
+
+namespace ast {
+    struct VariableDeclaration final {};
+    struct Assignment final {};
+    struct If final {};
+    struct While final {};
+    struct Return final {};
+    struct Block final {};
+    struct ExpressionAssignment final {}; 
+}

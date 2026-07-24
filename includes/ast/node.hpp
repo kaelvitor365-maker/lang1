@@ -6,6 +6,7 @@
 #include <variant>
 #include "token.hpp"
 #include "expr.hpp"
+#include "stmt.hpp"
 
 struct Node final{
     std::variant<
@@ -17,7 +18,13 @@ struct Node final{
         Expr<ast::Binary>,
         Expr<ast::Unary>,
         Expr<ast::Call>,
-        Expr<ast::EndOfFIle>
+        Expr<ast::EndOfFIle>,
+        Stmt<ast::VariableDeclaration>,
+        Stmt<ast::Assignment>,
+        Stmt<ast::Block>,
+        Stmt<ast::Return>,
+        Stmt<ast::If>,
+        Stmt<ast::While>
     >value;
 
 
