@@ -38,7 +38,7 @@ CXXFLAGS := \
 	-Isrc \
 	-Isrc/lexer \
 	-Isrc/parser \
-	-Isrc/parser/implements \
+	-Isrc/parser/expression \
 	-Isrc/ast \
 	-Isrc/eval
 
