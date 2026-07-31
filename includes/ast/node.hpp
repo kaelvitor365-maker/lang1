@@ -18,11 +18,11 @@ struct Node final{
         Expr<ast::Binary>,
         Expr<ast::Unary>,
         Expr<ast::Call>,
+        Expr<ast::Assignment>,
         Expr<ast::EndOfFIle>,
         Stmt<ast::VariableDeclaration>,
         Stmt<ast::Assignment>,
         Stmt<ast::Block>,
-        Stmt<ast::Return>,
         Stmt<ast::If>,
         Stmt<ast::While>
     >value;

@@ -4,8 +4,7 @@
 void ast::details::printer::print(const Node& expr){
     std::visit([&](auto&& value){
         this->print(value);
-    }
-    ,expr.value);
+    },expr.value);
 }
 void ast::details::printer::print(const Expr<ast::Number>& expr){
 
@@ -14,7 +13,6 @@ void ast::details::printer::print(const Expr<ast::Number>& expr){
     this->str += std::format("{}line: {}\n", this->putSpace(), expr.line);
     --this->spaces;
     this->str += std::format("{}{}\n", this->putSpace(), '}');
-
 }
 
 
@@ -38,8 +36,6 @@ void ast::details::printer::print(const Expr<ast::Boolean>& expr){
     this->str += std::format("{}{}\n", this->putSpace(), '}');
 
 }
-
-
 
 void ast::details::printer::print(const Expr<ast::Identifier>& expr){
 
@@ -91,6 +87,25 @@ void ast::details::printer::print(const Expr<ast::Binary>& expr){
 }
 
 void ast::details::printer::print(const Expr<ast::EndOfFIle>& expr){
+
     this->str += std::format("{}EOF:\n", this->putSpace()); ++this->spaces;
     this->str += std::format("{}line:\n", expr.line); --this->spaces;
 }
+
+void ast::details::printer::print(const Expr<ast::Assignment>& expr){
+
+    this->str +=  std::format("{0}Expression Assignment:\n{0}{1}\n", this->putSpace(), '{');
+    ++this->spaces;
+    this->str += std::format("{0}line: {1}\n", this->putSpace(), expr.line);
+    this->str += std::format("{0}target:\n{0}{1}", this->putSpace(), '{');
+    ++this->spaces;
+    this->print(*expr.target);
+    --this->spaces;
+    this->str += std::format("{0}{1}\n", this->putSpace(), '}');
+    this->str += std::format("{0}Expression:\n{0}{1}", this->putSpace(), '{');
+}
+
+
+
+
+

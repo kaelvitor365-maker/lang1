@@ -89,3 +89,14 @@ struct Expr<ast::EndOfFIle> {
     {}
 };
 
+template<>
+struct Expr<ast::Assignment> {
+    std::size_t line;
+    std::unique_ptr<Node> target;
+    std::unique_ptr<Node> expression;
+
+    Expr(std::size_t line, std::unique_ptr<Node> target, std::unique_ptr<Node> expression) :
+        line(line), target(std::move(target)), expression(std::move(expression))
+    {}
+};
+

@@ -16,7 +16,8 @@ SRC := \
 	src/parser/implements/logical.cpp \
 	src/parser/implements/postfix.cpp \
 	src/ast/ast.cpp \
-	src/ast/print.cpp \
+	src/ast/printExpr.cpp \
+	src/ast/printerStmt.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \
 	main.cpp

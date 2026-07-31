@@ -18,5 +18,4 @@ namespace ast {
     struct While final {};
     struct Return final {};
     struct Block final {};
-    struct ExpressionAssignment final {}; 
 }

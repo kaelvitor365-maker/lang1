@@ -16,44 +16,36 @@ struct Stmt final {};
 template<>
 struct Stmt<ast::VariableDeclaration> final {
     std::size_t line;
-    std::string name;
-    std::string type;
+    std::unique_ptr<Node> target;
+    std::unique_ptr<Node> type;
     std::unique_ptr<Node> initializer;
-    Stmt(std::size_t line, std::string name, std::string type, std::unique_ptr<Node> initializer = nullptr) :
-        line(line), name(std::move(name)), type(std::move(type)), initializer(std::move(initializer))
+    Stmt(std::size_t line, std::unique_ptr<Node> target, std::unique_ptr<Node> type, std::unique_ptr<Node> initializer = nullptr) :
+        line(line), target(std::move(target)), type(std::move(type)), initializer(std::move(initializer))
     {}
 };
 
 template<>
 struct Stmt<ast::Assignment> final {
     std::size_t line;
-    std::string name;
+    std::unique_ptr<Node> target;
     std::unique_ptr<Node> expression;
-    Stmt(std::size_t line, std::string name, std::unique_ptr<Node> expression = nullptr) :
-        line(line), name(std::move(name)), expression(std::move(expression))
+    Stmt(std::size_t line, std::unique_ptr<Node> target, std::unique_ptr<Node> expression = nullptr) :
+        line(line), target(std::move(target)), expression(std::move(expression))
     {}
 };
 
 template<>
 struct Stmt<ast::Block> {
     std::size_t line;
-    std::vector<Node> statements;
+    std::vector<std::unique_ptr<Node>> statements;
 
-    Stmt(std::size_t line, std::vector<Node> statements) :
+    Stmt(std::size_t line, std::vector<std::unique_ptr<Node>> statements) :
         line(line), statements(std::move(statements))
     {}
 };
 
 
-template<>
-struct Stmt<ast::Return> {
-    std::size_t line;
-    std::unique_ptr<Node> expression;
 
-    Stmt(std::size_t line, std::unique_ptr<Node> expression = nullptr) :
-        line(line), expression(std::move(expression))
-    {}
-};
 
 template<>
 struct Stmt<ast::If> {
@@ -76,5 +68,6 @@ struct Stmt<ast::While> {
         line(line), condition(std::move(condition)), block(std::move(block))
     {}
 };
+
 
 

@@ -31,6 +31,14 @@ namespace ast::details {
         void print(const Expr<ast::Call>& expr);
         void print(const Expr<ast::Binary>& expr);
         void print(const Expr<ast::EndOfFIle>& expr);
+        void print(const Expr<ast::Assignment>& expr);
+
+        void print(const Stmt<ast::VariableDeclaration>& stmt);
+        void print(const Stmt<ast::Assignment>& stmt);
+        void print(const Stmt<ast::Return>& stmt);
+        void print(const Stmt<ast::Block>& stmt);
+        void print(const Stmt<ast::If>& stmt);
+        void print(const Stmt<ast::While>& stmt);
 
         std::string str{""};
         std::size_t spaces = 0;
@@ -60,6 +68,8 @@ namespace std {
 }
 
 std::ostream& operator<<(std::ostream& os, Node& node);
+
+
 
 
 
