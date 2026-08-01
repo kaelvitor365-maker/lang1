@@ -7,17 +7,22 @@ SRC := \
 	src/lexer/_lexer.cpp \
 	src/lexer/lexer_utils.cpp \
 	src/parser/parser.cpp \
-	src/parser/implements/primary.cpp \
-	src/parser/implements/unary.cpp \
-	src/parser/implements/factor.cpp \
-	src/parser/implements/term.cpp \
-	src/parser/implements/bitwise.cpp \
-	src/parser/implements/comparison.cpp\
-	src/parser/implements/logical.cpp \
-	src/parser/implements/postfix.cpp \
+	src/parser/expression/primary.cpp \
+	src/parser/expression/unary.cpp \
+	src/parser/expression/factor.cpp \
+	src/parser/expression/term.cpp \
+	src/parser/expression/bitwise.cpp \
+	src/parser/expression/comparison.cpp \
+	src/parser/expression/logical.cpp \
+	src/parser/expression/postfix.cpp \
+	src/parser/statements/variableDeclaration.cpp \
+	src/parser/statements/assingment.cpp \
+	src/parser/statements/block.cpp \
+	src/parser/statements/ifStatement.cpp \
+	src/parser/statements/whileStatement.cpp \
 	src/ast/ast.cpp \
 	src/ast/printExpr.cpp \
-	src/ast/printerStmt.cpp \
+	src/ast/printStmt.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \
 	main.cpp
@@ -32,6 +37,7 @@ CXXFLAGS := \
 	-g \
 	-Iincludes \
 	-Iincludes/lexer \
+	-Iincludes/parser \
 	-Iincludes/token \
 	-Iincludes/ast \
 	-Iincludes/ast/ASTprinter \
@@ -44,7 +50,7 @@ CXXFLAGS := \
 
 
 FILE := lang_arqs/test.lang
-.PHONY: all run clean rebuild
+.PHONY: all run clean rebuild restart tokenize parserize
 
 all: $(TARGET)
 
@@ -66,3 +72,11 @@ clean:
 	@rm -rf build
 
 rebuild: clean all
+
+restart: clean run
+
+tokenize:
+	./$(TARGET) --Tokenize $(FILE)
+
+parserize:
+	./$(TARGET) --Parserize $(FILE)

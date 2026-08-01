@@ -165,6 +165,7 @@ class Lexer final{
             {"if", TokenType::TOKEN_IF},
             {"else", TokenType::TOKEN_ELSE},
             {"for", TokenType::TOKEN_FOR},
+            {"while", TokenType::TOKEN_WHILE},
             {"do", TokenType::TOKEN_DO_WHILE},
             {"break", TokenType::TOKEN_BREAK},
             {"continue", TokenType::TOKEN_CONTINUE},

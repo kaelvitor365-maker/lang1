@@ -24,7 +24,7 @@ void Parser::consume(TokenType token){
     if(!check(token)){
 
         std::cerr 
-            << "Expected: " << static_cast<int>(token)
+            << "Expected: " << details::token_names[static_cast<std::size_t>(token)]
             << "\nGot: " << details::token_names[static_cast<std::size_t>(this->current.type)]
             << "\nLine: " << current.line
             << "\n";
@@ -36,11 +36,33 @@ void Parser::consume(TokenType token){
 }
 
 Node Parser::expression(){
-    return this->comparison();
+    return this->logical();
+}
+Node Parser::statement(){
+
+    if(this->check(TokenType::TOKEN_VAR)){
+        return this->variableDeclaration();
+    }
+
+    if(this->check(TokenType::TOKEN_IF)){
+        return this->ifStatement();
+    }
+
+    if(this->check(TokenType::TOKEN_WHILE)){
+        return this->whileStatement();
+    }
+
+    return this->assignment();
 }
 
-Node Parser::parse(){
-    return this->expression();
+std::vector<std::unique_ptr<Node>> Parser::parse(){
+    std::vector<std::unique_ptr<Node>> statements;
+
+    while(!this->check(TokenType::TOKEN_EOF)){
+        statements.push_back(std::make_unique<Node>(this->statement()));
+    }
+
+    return statements;  
 }
 
 

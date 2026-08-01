@@ -3,9 +3,12 @@
 lang
 ├─ includes
 │  ├─ ast
+│  │  ├─ ASTprinter
+│  │  │  └─ ASTprinter.hpp
 │  │  ├─ ast.hpp
 │  │  ├─ expr.hpp
-│  │  └─ node.hpp
+│  │  ├─ node.hpp
+│  │  └─ stmt.hpp
 │  ├─ eval.hpp
 │  ├─ lexer
 │  │  ├─ README.md
@@ -22,7 +25,9 @@ lang
 ├─ makefile
 └─ src
    ├─ ast
-   │  └─ ast.cpp
+   │  ├─ ast.cpp
+   │  ├─ printExpr.cpp
+   │  └─ printStmt.cpp
    ├─ eval
    │  └─ eval.cpp
    ├─ lexer
@@ -30,7 +35,7 @@ lang
    │  ├─ lexer.cpp
    │  └─ lexer_utils.cpp
    ├─ parser
-   │  ├─ implements
+   │  ├─ expression
    │  │  ├─ bitwise.cpp
    │  │  ├─ comparison.cpp
    │  │  ├─ factor.cpp

@@ -1,1 +1,9 @@
-10 + b - c("ola", mundo) * 2 & 7 == false
+var num: int = 10 + 15;
+var sum: int;
+num = 16;
+if(num == 16){
+    while(num > 0){
+        sum = sum + num;
+        num = num - 1;
+    }
+}

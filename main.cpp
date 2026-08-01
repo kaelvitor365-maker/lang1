@@ -11,8 +11,10 @@ int main(int argc, char* args[]){
     if(argc == 2){
         Lexer lexer(args[1]);
         Parser parser(lexer);
-        Node node = parser.parse();
-        std::cout << node << std::endl;
+        auto nodes = parser.parse();
+        for(std::size_t i = 0; i < nodes.size(); ++i){
+            std::cout << *nodes[i] << std::endl;
+        }
 
         return 0;
     }
@@ -31,8 +33,10 @@ int main(int argc, char* args[]){
     if(std::string{args[1]} == "--Parserize"){
         Lexer lexer(args[2]);
         Parser parser(lexer);
-        Node node = parser.parse();
-        std::cout << node << std::endl;
+        auto nodes = parser.parse();
+        for(std::size_t i = 0; i < nodes.size(); ++i){
+            std::cout << *nodes[i] << std::endl;
+        }
     }
 
 

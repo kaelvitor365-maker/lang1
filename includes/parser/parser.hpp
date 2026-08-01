@@ -10,9 +10,10 @@ class Parser final {
         explicit Parser(Lexer& lexer) : lexer(lexer), current(lexer.nextToken()) {}
 
 
-        Node parse();
+        std::vector<std::unique_ptr<Node>> parse();
     private:
 
+    //** EXPRESSIONS **//
     Node expression();
     Node primary();
     Node postfix();
@@ -22,7 +23,16 @@ class Parser final {
     Node bitwise();
     Node comparison();
     Node logical();
-    
+
+    //** STATEMENTS **//
+    Node statement();
+    Node variableDeclaration();
+    Node assignment();
+    Node block();
+    Node ifStatement();
+    Node whileStatement();
+
+    //** UTILITYS **//
     void advance();
     bool check(TokenType token);
     bool match(TokenType token);

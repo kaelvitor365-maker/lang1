@@ -19,7 +19,12 @@ void ast::details::printer::print(const Stmt<ast::VariableDeclaration>& stmt){
 
     this->str += this->putSpace() + "initializer:\n";
     this->str += this->putSpace() + "{\n"; ++this->spaces;
-    this->print(*stmt.initializer); --this->spaces;
+    if(stmt.initializer != nullptr){
+        this->print(*stmt.initializer); --this->spaces;
+    }
+    else{
+        this->str += this->putSpace() + "null\n"; --this->spaces;
+    }
     this->str += this->putSpace() + "}\n"; --this->spaces;
 
     this->str += std::format("{0}{1}\n", this->putSpace(), '}');
@@ -32,12 +37,12 @@ void ast::details::printer::print(const Stmt<ast::Assignment>& stmt){
 
     this->str += std::format("{0}line: {1}\n", this->putSpace(), stmt.line);
 
-    this->str += this->putSpace() + "type:\n";
+    this->str += this->putSpace() + "target:\n";
     this->str += this->putSpace() + "{\n"; ++this->spaces;
     this->print(*stmt.target); --this->spaces;
     this->str += this->putSpace() + "}\n";
 
-    this->str += this->putSpace() + "type:\n";
+    this->str += this->putSpace() + "expression:\n";
     this->str += this->putSpace() + "{\n"; ++this->spaces;
     this->print(*stmt.expression); --this->spaces;
     this->str += this->putSpace() + "}\n"; --this->spaces;
@@ -62,7 +67,7 @@ void ast::details::printer::print(const Stmt<ast::Block>& stmt){
 
 void ast::details::printer::print(const Stmt<ast::If>& stmt){
 
-    this->str += this->putSpace() + "Block:\n" + this->putSpace() + "{\n"; ++this->spaces;
+    this->str += this->putSpace() + "If:\n" + this->putSpace() + "{\n"; ++this->spaces;
     this->str += std::format("{0}line: {1}\n", this->putSpace(), stmt.line);
 
     this->str += std::format("{0}condition:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
@@ -79,7 +84,7 @@ void ast::details::printer::print(const Stmt<ast::If>& stmt){
 
 void ast::details::printer::print(const Stmt<ast::While>& stmt){
 
-    this->str += this->putSpace() + "Block:\n" + this->putSpace() + "{\n"; ++this->spaces;
+    this->str += this->putSpace() + "While:\n" + this->putSpace() + "{\n"; ++this->spaces;
     this->str += std::format("{0}line: {1}\n", this->putSpace(), stmt.line);
 
     this->str += std::format("{0}condition:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;

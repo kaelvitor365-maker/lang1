@@ -1,11 +1,58 @@
 #include "lexer.hpp"
 #include "lexer_utils.hpp"
-
+#include <iterator>
 void Lexer::scanToken(){
 
-    this->skipSpaces();
-    
+while(true){
 
+        skipSpaces();
+
+        if(it == end)
+            break;
+
+
+        if(
+            *it == '/' &&
+            std::next(it) != end &&
+            *std::next(it) == '/'
+        ){
+            while(it != end && *it != '\n')
+                ++it;
+
+            continue;
+        }
+
+
+
+        if(
+            *it == '/' &&
+            std::next(it) != end &&
+            *std::next(it) == '*'
+        ){
+            it += 2;
+
+            while(it != end){
+
+                if(
+                    *it == '*' &&
+                    std::next(it) != end &&
+                    *std::next(it) == '/'
+                ){
+                    it += 2;
+                    break;
+                }
+
+                if(*it == '\n')
+                    ++line;
+
+                ++it;
+            }
+
+            continue;
+        }
+
+        break;
+    }
 
     // EOF
     if(this->it == this->end){

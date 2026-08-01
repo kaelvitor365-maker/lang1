@@ -1,4 +1,5 @@
 #include "parser.hpp"
+#include <iostream>
 
 Node Parser::primary(){
 
@@ -59,6 +60,6 @@ Node Parser::primary(){
         };
     }
     
-
+    std::cout << std::format("{}\n", this->current);
     throw std::runtime_error("TOKEN ERRADO");
 }
