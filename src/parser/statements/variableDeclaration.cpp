@@ -6,11 +6,11 @@ Node Parser::variableDeclaration(){
 
     this->consume(TokenType::TOKEN_VAR);
 
-    Node target = this->expression();
+    Node target = this->primary();
 
     this->consume(TokenType::TOKEN_COLON);
 
-    Node type = this->expression();
+    Node type = this->primary();
 
     std::unique_ptr<Node> initializer = nullptr;
 

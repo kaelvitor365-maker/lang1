@@ -52,6 +52,10 @@ Node Parser::statement(){
         return this->whileStatement();
     }
 
+    if(this->check(TokenType::TOKEN_FOR)){
+        return this->forStatement();
+    }
+
     return this->assignment();
 }
 

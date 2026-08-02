@@ -14,7 +14,8 @@ lang
 │  │  ├─ README.md
 │  │  ├─ lexer.hpp
 │  │  └─ lexer_utils.hpp
-│  ├─ parser.hpp
+│  ├─ parser
+│  │  └─ parser.hpp
 │  └─ token
 │     ├─ README.md
 │     ├─ _token.hpp
@@ -44,7 +45,14 @@ lang
    │  │  ├─ primary.cpp
    │  │  ├─ term.cpp
    │  │  └─ unary.cpp
-   │  └─ parser.cpp
+   │  ├─ parser.cpp
+   │  └─ statements
+   │     ├─ assingment.cpp
+   │     ├─ block.cpp
+   │     ├─ forStatement.cpp
+   │     ├─ ifStatement.cpp
+   │     ├─ variableDeclaration.cpp
+   │     └─ whileStatement.cpp
    └─ token
       └─ token.cpp
 

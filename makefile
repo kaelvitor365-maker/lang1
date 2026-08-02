@@ -20,6 +20,7 @@ SRC := \
 	src/parser/statements/block.cpp \
 	src/parser/statements/ifStatement.cpp \
 	src/parser/statements/whileStatement.cpp \
+	src/parser/statements/forStatement.cpp \
 	src/ast/ast.cpp \
 	src/ast/printExpr.cpp \
 	src/ast/printStmt.cpp \
@@ -45,6 +46,7 @@ CXXFLAGS := \
 	-Isrc/lexer \
 	-Isrc/parser \
 	-Isrc/parser/expression \
+	-Isrc/parser/statements \
 	-Isrc/ast \
 	-Isrc/eval
 

@@ -16,6 +16,7 @@ namespace ast {
     struct Assignment final {};
     struct If final {};
     struct While final {};
+    struct For final {};
     struct Return final {};
     struct Block final {};
 }

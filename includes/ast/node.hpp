@@ -24,7 +24,8 @@ struct Node final{
         Stmt<ast::Assignment>,
         Stmt<ast::Block>,
         Stmt<ast::If>,
-        Stmt<ast::While>
+        Stmt<ast::While>,
+        Stmt<ast::For>
     >value;
 
 

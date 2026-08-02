@@ -39,6 +39,7 @@ namespace ast::details {
         void print(const Stmt<ast::Block>& stmt);
         void print(const Stmt<ast::If>& stmt);
         void print(const Stmt<ast::While>& stmt);
+        void print(const Stmt<ast::For>& stmt);
 
         std::string str{""};
         std::size_t spaces = 0;

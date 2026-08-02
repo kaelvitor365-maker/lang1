@@ -74,8 +74,17 @@ void ast::details::printer::print(const Stmt<ast::If>& stmt){
     this->print(*stmt.condition);
     --this->spaces; this->str += this->putSpace() + "}\n";
 
-    this->str += std::format("{0}block:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
-    this->print(*stmt.block);
+    this->str += std::format("{0}then branch:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
+    this->print(*stmt.thenBranch);
+    --this->spaces; this->str += this->putSpace() + "}\n";
+
+    this->str += std::format("{0}else branch:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
+    if(stmt.elseBranch != nullptr){
+        this->print(*stmt.elseBranch);
+    }
+    else{
+        this->str += this->putSpace() + "null\n";
+    }
     --this->spaces; this->str += this->putSpace() + "}\n";
 
     --this->spaces; this->str += this->putSpace() + "}\n";
@@ -93,6 +102,51 @@ void ast::details::printer::print(const Stmt<ast::While>& stmt){
 
     this->str += std::format("{0}block:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
     this->print(*stmt.block);
+    --this->spaces; this->str += this->putSpace() + "}\n";
+
+    --this->spaces; this->str += this->putSpace() + "}\n";
+
+}
+
+void ast::details::printer::print(const Stmt<ast::For>& stmt){
+
+    this->str += this->putSpace() + "For:\n" + this->putSpace() + "{\n"; ++this->spaces;
+    this->str += std::format("{0}line: {1}\n", this->putSpace(), stmt.line);
+
+    this->str += std::format("{0}initializer:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
+    if(stmt.initializer != nullptr){
+        this->print(*stmt.initializer);
+    }
+    else{
+        this->str += this->putSpace() + "null\n";
+    }
+    --this->spaces; this->str += this->putSpace() + "}\n";
+
+    this->str += std::format("{0}condition:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
+    if(stmt.condition != nullptr){
+        this->print(*stmt.condition);
+    }
+    else{
+        this->str += this->putSpace() + "null\n";
+    }
+    --this->spaces; this->str += this->putSpace() + "}\n";
+
+    this->str += std::format("{0}increment:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
+    if(stmt.increment != nullptr){
+        this->print(*stmt.increment);
+    }
+    else{
+        this->str += this->putSpace() + "null\n";
+    }
+    --this->spaces; this->str += this->putSpace() + "}\n";
+
+    this->str += std::format("{0}block:\n{0}{1}\n", this->putSpace(), '{'); ++this->spaces;
+    if(stmt.block != nullptr){
+        this->print(*stmt.block);
+    }
+    else{
+        this->str += this->putSpace() + "null\n";
+    }
     --this->spaces; this->str += this->putSpace() + "}\n";
 
     --this->spaces; this->str += this->putSpace() + "}\n";

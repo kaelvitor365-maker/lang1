@@ -51,10 +51,11 @@ template<>
 struct Stmt<ast::If> {
     std::size_t line;
     std::unique_ptr<Node> condition;
-    std::unique_ptr<Node> block;
+    std::unique_ptr<Node> thenBranch;
+    std::unique_ptr<Node> elseBranch;
 
-    Stmt(std::size_t line, std::unique_ptr<Node> condition, std::unique_ptr<Node> block) :
-        line(line), condition(std::move(condition)), block(std::move(block))
+    Stmt(std::size_t line, std::unique_ptr<Node> condition, std::unique_ptr<Node> thenBranch, std::unique_ptr<Node> elseBranch = nullptr) :
+        line(line), condition(std::move(condition)), thenBranch(std::move(thenBranch)), elseBranch(std::move(elseBranch))
     {}
 };
 
@@ -66,6 +67,19 @@ struct Stmt<ast::While> {
 
     Stmt(std::size_t line, std::unique_ptr<Node> condition, std::unique_ptr<Node> block) :
         line(line), condition(std::move(condition)), block(std::move(block))
+    {}
+};
+
+template<>
+struct Stmt<ast::For> {
+    std::size_t line;
+    std::unique_ptr<Node> initializer;
+    std::unique_ptr<Node> condition;
+    std::unique_ptr<Node> increment;
+    std::unique_ptr<Node> block;
+
+    Stmt(std::size_t line, std::unique_ptr<Node> initializer = nullptr, std::unique_ptr<Node> condition = nullptr, std::unique_ptr<Node> increment = nullptr, std::unique_ptr<Node> block = nullptr) :
+        line(line), initializer(std::move(initializer)), condition(std::move(condition)), increment(std::move(increment)), block(std::move(block))
     {}
 };
 
