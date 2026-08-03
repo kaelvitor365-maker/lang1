@@ -10,13 +10,13 @@ Node Parser::whileStatement(){
     this->consume(TokenType::TOKEN_LPAREN);
     Node expr = this->expression();
 
-this->consume(TokenType::TOKEN_RPAREN);
+    this->consume(TokenType::TOKEN_RPAREN);
 
     return Node{
-        Stmt<ast::While>{
+        Stmt<ast::loop::While>{
             line,
             std::make_unique<Node>(std::move(expr)),
-            std::make_unique<Node>(std::move(this->block()))
+            std::make_unique<Node>(this->statement())
         }
     };
     

@@ -28,11 +28,11 @@ Node Parser::forStatement(){
     this->consume(TokenType::TOKEN_RPAREN);
 
 
-    Node body = this->block();
+    Node body = this->statement();
 
 
     return Node{
-        Stmt<ast::For>{
+        Stmt<ast::loop::For>{
             line,
             std::make_unique<Node>(std::move(initializer)),
             std::make_unique<Node>(std::move(condition)),

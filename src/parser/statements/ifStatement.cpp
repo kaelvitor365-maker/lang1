@@ -10,16 +10,20 @@ Node Parser::ifStatement(){
     Node expr = this->expression();
     this->consume(TokenType::TOKEN_RPAREN);
 
-    Node thenBranch = this->block();
+    Node thenBranch = this->statement(); 
 
     std::unique_ptr<Node> elseBranch = nullptr;
 
     if(this->match(TokenType::TOKEN_ELSE)) {
 
-        elseBranch = (this->check(TokenType::TOKEN_IF)) ?
-            std::make_unique<Node>(this->ifStatement()) :
-            std::make_unique<Node>(this->block());
-    }
+        elseBranch =
+        (this->check(TokenType::TOKEN_IF)) 
+            ? std::make_unique<Node>(this->ifStatement()) 
+            : (this->check(TokenType::TOKEN_NOTHING)) 
+                    ? (this->nothingStatement(), nullptr)
+                    : std::make_unique<Node>(this->statement());
+        }
+        
 
     return Node{
         Stmt<ast::If>{

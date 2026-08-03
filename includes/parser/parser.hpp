@@ -35,6 +35,9 @@ class Parser final {
     Node forInitializer();
     Node forAssignment();
     Node forVariableDeclaration();
+    Node nothingStatement();
+    Node breakStatement();
+    Node continueStatement();
 
     //** UTILITYS **//
     void advance();

@@ -30,7 +30,7 @@ namespace ast::details {
         void print(const Expr<ast::Unary>& expr);
         void print(const Expr<ast::Call>& expr);
         void print(const Expr<ast::Binary>& expr);
-        void print(const Expr<ast::EndOfFIle>& expr);
+        void print(const Expr<ast::EndOfFile>& expr);
         void print(const Expr<ast::Assignment>& expr);
 
         void print(const Stmt<ast::VariableDeclaration>& stmt);
@@ -38,8 +38,12 @@ namespace ast::details {
         void print(const Stmt<ast::Return>& stmt);
         void print(const Stmt<ast::Block>& stmt);
         void print(const Stmt<ast::If>& stmt);
-        void print(const Stmt<ast::While>& stmt);
-        void print(const Stmt<ast::For>& stmt);
+        void print(const Stmt<ast::loop::While>& stmt);
+        void print(const Stmt<ast::loop::For>& stmt);
+        void print(const Stmt<ast::loop::doWhile>& stmt);
+        void print(const Stmt<ast::loop::Break>& stmt);
+        void print(const Stmt<ast::loop::Continue>& stmt);
+        void print(const Stmt<ast::Nothing>& stmt);
 
         std::string str{""};
         std::size_t spaces = 0;

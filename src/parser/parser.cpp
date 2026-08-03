@@ -2,6 +2,17 @@
 #include <iostream>
 #include "parser.hpp"
 
+Node Parser::nothingStatement(){
+    std::size_t line = this->current.line;
+    this->consume(TokenType::TOKEN_NOTHING);
+    this->consume(TokenType::TOKEN_SEMICOLON);
+    return Node{
+        Stmt<ast::Nothing>{
+            line
+        }
+    };
+}
+
 void Parser::advance(){
     this->current = this->lexer.nextToken();
 }
@@ -54,6 +65,22 @@ Node Parser::statement(){
 
     if(this->check(TokenType::TOKEN_FOR)){
         return this->forStatement();
+    }
+
+    if(this->check(TokenType::TOKEN_NOTHING)){
+        return this->nothingStatement();
+    }
+
+    if(this->check(TokenType::TOKEN_LBRACE)){
+        return this->block();
+    }
+
+    if(this->check(TokenType::TOKEN_BREAK)){
+        return this->breakStatement();
+    }
+
+    if(this->check(TokenType::TOKEN_CONTINUE)){
+        return this->continueStatement();
     }
 
     return this->assignment();

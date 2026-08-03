@@ -8,15 +8,25 @@ namespace ast {
     struct Binary final {};
     struct Unary final {};
     struct Call final {};
-    struct EndOfFIle final {};
+    struct EndOfFile final {};
 }
 
 namespace ast {
     struct VariableDeclaration final {};
     struct Assignment final {};
     struct If final {};
-    struct While final {};
-    struct For final {};
+    
+    namespace loop {
+        struct While final {};
+        struct doWhile final {};
+        struct For final {};
+        struct Break final {};
+        struct Continue final {};
+    }
+
+
     struct Return final {};
     struct Block final {};
+
+    struct Nothing final {};
 }

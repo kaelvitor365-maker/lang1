@@ -19,13 +19,17 @@ struct Node final{
         Expr<ast::Unary>,
         Expr<ast::Call>,
         Expr<ast::Assignment>,
-        Expr<ast::EndOfFIle>,
+        Expr<ast::EndOfFile>,
         Stmt<ast::VariableDeclaration>,
         Stmt<ast::Assignment>,
         Stmt<ast::Block>,
         Stmt<ast::If>,
-        Stmt<ast::While>,
-        Stmt<ast::For>
+        Stmt<ast::loop::While>,
+        Stmt<ast::loop::For>,
+        Stmt<ast::loop::doWhile>,
+        Stmt<ast::loop::Break>,
+        Stmt<ast::loop::Continue>,
+        Stmt<ast::Nothing>
     >value;
 
 

@@ -21,6 +21,7 @@ SRC := \
 	src/parser/statements/ifStatement.cpp \
 	src/parser/statements/whileStatement.cpp \
 	src/parser/statements/forStatement.cpp \
+	src/parser/statements/breakContinue.cpp \
 	src/ast/ast.cpp \
 	src/ast/printExpr.cpp \
 	src/ast/printStmt.cpp \

@@ -80,7 +80,7 @@ struct Expr<ast::Call> {
 };
 
 template<>
-struct Expr<ast::EndOfFIle> {
+struct Expr<ast::EndOfFile> {
     std::size_t line;
     TokenType token;
 

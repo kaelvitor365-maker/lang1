@@ -1,4 +1,5 @@
 #include "ASTprinter.hpp"
+#include <format>
 
 
 void ast::details::printer::print(const Node& expr){
@@ -86,10 +87,12 @@ void ast::details::printer::print(const Expr<ast::Binary>& expr){
     this->str += std::format("{}{}\n", this->putSpace(), '}');
 }
 
-void ast::details::printer::print(const Expr<ast::EndOfFIle>& expr){
+void ast::details::printer::print(const Expr<ast::EndOfFile>& expr){
 
-    this->str += std::format("{}EOF:\n", this->putSpace()); ++this->spaces;
-    this->str += std::format("{}line:\n", expr.line); --this->spaces;
+    this->str += std::format("{}EndOfFile:\n{}{}\n", this->putSpace(), this->putSpace(), '{'); ++this->spaces;
+    this->str += std::format("{}line: {}\n", this->putSpace(), expr.line);
+    --this->spaces;
+    this->str += std::format("{}{}\n", this->putSpace(), '}');
 }
 
 void ast::details::printer::print(const Expr<ast::Assignment>& expr){

@@ -106,6 +106,7 @@ enum class TokenType {
     TOKEN_EOF,
     TOKEN_INCOMPLETED_STRING,
     TOKEN_INVALID,
+    TOKEN_NOTHING,
     /// @}
 
     TOKEN_COUNT
@@ -197,7 +198,8 @@ namespace details {
         // Special
         "TOKEN_EOF",
         "TOKEN_INCOMPLETED_STRING",
-        "TOKEN_INVALID"
+        "TOKEN_INVALID",
+        "TOKEN_NOTHING"
     };
 
 };

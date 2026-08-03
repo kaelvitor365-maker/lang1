@@ -172,7 +172,9 @@ class Lexer final{
             {"func", TokenType::TOKEN_FUNC},
             {"return", TokenType::TOKEN_RETURN},
             {"main", TokenType::TOKEN_MAIN},
-            {"var", TokenType::TOKEN_VAR}
+            {"var", TokenType::TOKEN_VAR},
+            {"nothing", TokenType::TOKEN_NOTHING},
+
         };
 
 

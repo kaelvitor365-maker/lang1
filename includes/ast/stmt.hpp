@@ -60,28 +60,61 @@ struct Stmt<ast::If> {
 };
 
 template<>
-struct Stmt<ast::While> {
+struct Stmt<ast::loop::While> {
     std::size_t line;
     std::unique_ptr<Node> condition;
-    std::unique_ptr<Node> block;
+    std::unique_ptr<Node> body;
 
-    Stmt(std::size_t line, std::unique_ptr<Node> condition, std::unique_ptr<Node> block) :
-        line(line), condition(std::move(condition)), block(std::move(block))
+    Stmt(std::size_t line, std::unique_ptr<Node> condition, std::unique_ptr<Node> body) :
+        line(line), condition(std::move(condition)), body(std::move(body))
     {}
 };
 
 template<>
-struct Stmt<ast::For> {
+struct Stmt<ast::loop::doWhile> {
+    std::size_t line;
+    std::unique_ptr<Node> condition;
+    std::unique_ptr<Node> body;
+
+    Stmt(std::size_t line, std::unique_ptr<Node> body, std::unique_ptr<Node> condition) :
+        line(line), condition(std::move(condition)), body(std::move(body))
+    {}
+};
+template<>
+struct Stmt<ast::loop::For> {
     std::size_t line;
     std::unique_ptr<Node> initializer;
     std::unique_ptr<Node> condition;
     std::unique_ptr<Node> increment;
-    std::unique_ptr<Node> block;
+    std::unique_ptr<Node> body;
 
-    Stmt(std::size_t line, std::unique_ptr<Node> initializer = nullptr, std::unique_ptr<Node> condition = nullptr, std::unique_ptr<Node> increment = nullptr, std::unique_ptr<Node> block = nullptr) :
-        line(line), initializer(std::move(initializer)), condition(std::move(condition)), increment(std::move(increment)), block(std::move(block))
+    Stmt(std::size_t line, std::unique_ptr<Node> initializer = nullptr, std::unique_ptr<Node> condition = nullptr, std::unique_ptr<Node> increment = nullptr, std::unique_ptr<Node> body = nullptr) :
+        line(line), initializer(std::move(initializer)), condition(std::move(condition)), increment(std::move(increment)), body(std::move(body))
     {}
 };
+
+template<>
+struct Stmt<ast::loop::Break> {
+    std::size_t line;
+
+    Stmt(std::size_t line) : line(line) {}
+};
+
+template<>
+struct Stmt<ast::loop::Continue> {
+    std::size_t line;   
+
+    Stmt(std::size_t line) : line(line) {}
+};
+
+template<>
+struct Stmt<ast::Nothing> {
+    std::size_t line;
+
+    Stmt(std::size_t line) : line(line) {}
+};
+
+
 
 
 
