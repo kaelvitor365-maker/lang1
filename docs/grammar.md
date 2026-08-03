@@ -16,7 +16,7 @@ var name: type = expression;
 
 ## CONDIÇÃO
 
-AS condições podem ser feita com `if` e `else`
+As condições podem ser feita com `if` e `else`
 
 ### IF
 
