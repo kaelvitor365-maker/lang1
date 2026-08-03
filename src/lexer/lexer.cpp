@@ -1,6 +1,15 @@
 #include "lexer.hpp"
 #include "lexer_utils.hpp"
 #include <iterator>
+void Lexer::skipSpaces(){
+    while(this->it != this->end && details::isSpace(*this->it)){
+        if(*this->it == '\n')
+            ++this->line;
+        ++this->it;
+    }
+}
+
+
 void Lexer::scanToken(){
 
 while(true){

@@ -4,7 +4,10 @@ TARGET := build/lang
 
 SRC := \
 	src/lexer/lexer.cpp \
-	src/lexer/_lexer.cpp \
+	src/lexer/implements/string.cpp \
+	src/lexer/implements/number.cpp \
+	src/lexer/implements/alphaIdentifier.cpp \
+	src/lexer/implements/specialCharacters.cpp \
 	src/lexer/lexer_utils.cpp \
 	src/parser/parser.cpp \
 	src/parser/expression/primary.cpp \
@@ -30,12 +33,15 @@ SRC := \
 	main.cpp
 
 OBJS := $(patsubst %.cpp,build/%.o,$(SRC))
+DEPS := $(patsubst %.cpp,build/%.d,$(SRC))
 
 CXXFLAGS := \
 	-std=c++20 \
 	-Wall \
 	-Wextra \
 	-Werror \
+	-MMD \
+	-MP \
 	-g \
 	-Iincludes \
 	-Iincludes/lexer \
@@ -45,6 +51,7 @@ CXXFLAGS := \
 	-Iincludes/ast/ASTprinter \
 	-Isrc \
 	-Isrc/lexer \
+	-Isrc/lexer/implements \
 	-Isrc/parser \
 	-Isrc/parser/expression \
 	-Isrc/parser/statements \
@@ -83,3 +90,5 @@ tokenize:
 
 parserize:
 	./$(TARGET) --Parserize $(FILE)
+
+-include $(DEPS)

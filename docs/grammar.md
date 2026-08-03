@@ -132,3 +132,24 @@ for(i = 0; i < 100; i = i + 1){
     if(i == 50) break;
 }
 
+```
+
+## NOTHING
+
+o nothing ele permite que você não crie um bloco, por exemplo:
+```
+if(cond) nothing;
+```
+permite que o if não execute nada (extremamente inutil).
+
+e também funciona em loop's:
+
+`while`:
+```
+while(cond) nothing;
+```
+`for`:
+```
+for(init; cond; inc/dec) nothing;
+```
+

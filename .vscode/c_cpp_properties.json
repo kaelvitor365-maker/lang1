@@ -11,6 +11,7 @@
                 "${workspaceFolder}/includes/ast/ASTprinter",
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/src/lexer",
+                "${workspaceFolder}/src/lexer/implements",
                 "${workspaceFolder}/src/parser",
                 "${workspaceFolder}/src/ast",
                 "${workspaceFolder}/src/eval"

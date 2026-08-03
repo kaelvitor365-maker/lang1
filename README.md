@@ -1,6 +1,8 @@
 
 ```
 lang
+├─ docs
+│  └─ grammar.md
 ├─ includes
 │  ├─ ast
 │  │  ├─ ASTprinter
@@ -32,7 +34,11 @@ lang
    ├─ eval
    │  └─ eval.cpp
    ├─ lexer
-   │  ├─ _lexer.cpp
+   │  ├─ implements
+   │  │  ├─ alphaIdentifier.cpp
+   │  │  ├─ number.cpp
+   │  │  ├─ specialCharacters.cpp
+   │  │  └─ string.cpp
    │  ├─ lexer.cpp
    │  └─ lexer_utils.cpp
    ├─ parser
@@ -49,6 +55,7 @@ lang
    │  └─ statements
    │     ├─ assingment.cpp
    │     ├─ block.cpp
+   │     ├─ breakContinue.cpp
    │     ├─ forStatement.cpp
    │     ├─ ifStatement.cpp
    │     ├─ variableDeclaration.cpp
