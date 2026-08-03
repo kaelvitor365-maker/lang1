@@ -4,7 +4,7 @@
 
 ### DECLARAÇÃO
 
-somente a declaração pode ser feita somente com nome e tipo:
+A declaração pode ser feita somente com nome e tipo:
 ```
 var name: type;
 ```
@@ -16,7 +16,7 @@ var name: type = expression;
 
 ## CONDIÇÃO
 
-as condições podem ser feita com `if` e `else`
+AS condições podem ser feita com `if` e `else`
 
 ### IF
 
@@ -29,7 +29,7 @@ if(cond){
 
 ### IF ... ELSE
 
-o `else` pode ser utilizado após o `if`, da seguinte maneira:
+O `else` pode ser utilizado após o `if`, da seguinte maneira:
 ```
 if(cond){
     body
@@ -41,7 +41,7 @@ else{
 
 ### IF ... ELSE IF ... ELSE
 
-o `else if` é uma macro de expansão, criando um `if` `else` dentro do `else`:
+O `else if` é uma macro de expansão, criando um `if` `else` dentro do `else`:
 
 ```
 if(cond){
@@ -73,7 +73,7 @@ else{
 
 ## LOOP'S
 
-temos 3 tipos de loop:
+Temos 3 tipos de loop:
 
 
 |loop|descrição|
@@ -83,7 +83,7 @@ temos 3 tipos de loop:
 
 ### WHILE
 
-o `while` funciona da seguinte maneira:
+O `while` funciona da seguinte maneira:
 a palavra `while`, uma `cond` e um corpo. 
 ```
 while(cond){
@@ -93,7 +93,7 @@ while(cond){
 
 ### FOR
 
-o `for` funciona da seguinte maneira:
+O `for` funciona da seguinte maneira:
 a palavra `for`, um `init`, uma `cond`, e um `inc/dec`.
 ```
 for(init; cond; inc/dec){
@@ -101,7 +101,7 @@ for(init; cond; inc/dec){
 }
 ```
 
-também temos os controles de loops:
+Também temos os controles de loops:
 
 |palavra|descrição|
 |-------|---------|
@@ -110,7 +110,7 @@ também temos os controles de loops:
 
 ### CONTINUE & BREAK
 
-exemplo para o `continue` e `break`:
+Exemplo para o `continue` e `break`:
 
 ```
 var i: int = 0;
@@ -136,11 +136,11 @@ for(i = 0; i < 100; i = i + 1){
 
 ## NOTHING
 
-o nothing ele permite que você não crie um bloco, por exemplo:
+O nothing ele permite que você não crie um bloco, por exemplo:
 ```
 if(cond) nothing;
 ```
-permite que o if não execute nada (extremamente inutil).
+Permite que o if não execute nada (extremamente inutil).
 
 e também funciona em loop's:
 
