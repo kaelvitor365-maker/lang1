@@ -41,6 +41,7 @@ enum class TokenType {
     TOKEN_MINUS,
     TOKEN_MUL,
     TOKEN_DIV,
+    TOKEN_MOD,
     /// @}
 
     /// @name Assignment operators
@@ -51,6 +52,7 @@ enum class TokenType {
     TOKEN_MINUSEQ,
     TOKEN_MULEQ,
     TOKEN_DIVEQ,
+    TOKEN_MODEQ,
     /// @}
 
     /// @name Comparison operators
@@ -146,6 +148,7 @@ namespace details {
         "TOKEN_MINUS",
         "TOKEN_MUL",
         "TOKEN_DIV",
+        "TOKEN_MOD",
 
         // Assignment
         "TOKEN_EQUAL",
@@ -154,6 +157,7 @@ namespace details {
         "TOKEN_MINUSEQ",
         "TOKEN_MULEQ",
         "TOKEN_DIVEQ",
+        "TOKEN_MODEQ",
 
         // Comparison
         "TOKEN_GT",

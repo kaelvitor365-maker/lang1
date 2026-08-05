@@ -4,7 +4,11 @@ Node Parser::factor(){
     
     Node left = this->unary();
 
-    while(this->check(TokenType::TOKEN_MUL) || this->check(TokenType::TOKEN_DIV)){
+    while(
+        this->check(TokenType::TOKEN_MUL) ||
+        this->check(TokenType::TOKEN_DIV) ||
+        this->check(TokenType::TOKEN_MOD)
+    ){
         TokenType operation = this->current.type;
         std::size_t line = this->current.line;
 

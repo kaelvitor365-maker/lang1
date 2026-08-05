@@ -31,6 +31,7 @@ class Parser final {
     Node block();
     Node ifStatement();
     Node whileStatement();
+    Node doWhileStatement();
     Node forStatement();
     Node forInitializer();
     Node forAssignment();
