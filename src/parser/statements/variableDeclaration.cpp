@@ -10,7 +10,7 @@ Node Parser::variableDeclaration(){
 
     this->consume(TokenType::TOKEN_COLON);
 
-    Node type = this->primary();
+    Node type = this->type();
 
     std::unique_ptr<Node> initializer = nullptr;
 

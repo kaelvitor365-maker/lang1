@@ -90,6 +90,19 @@ Node Parser::statement(){
     return this->assignment();
 }
 
+Node Parser::type(){
+    if(this->check(TokenType::TOKEN_IDENTIFIER)){
+        return this->namedType();
+    }
+    throw std::runtime_error(
+        std::format(
+            "Unexpected token:\ngot: {}\nexpected: {}\n",
+            this->current, Token{TokenType::TOKEN_IDENTIFIER, this->current.line, std::monostate{}}
+        )
+    
+    );
+}
+
 std::vector<std::unique_ptr<Node>> Parser::parse(){
     std::vector<std::unique_ptr<Node>> statements;
 

@@ -26,9 +26,11 @@ SRC := \
 	src/parser/statements/forStatement.cpp \
 	src/parser/statements/breakContinue.cpp \
 	src/parser/statements/doWhile.cpp \
+	src/parser/type/namedType.cpp \
 	src/ast/ast.cpp \
 	src/ast/printExpr.cpp \
 	src/ast/printStmt.cpp \
+	src/ast/printType.cpp \
 	src/eval/eval.cpp \
 	src/token/token.cpp \
 	main.cpp

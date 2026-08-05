@@ -35,6 +35,18 @@ struct Stmt<ast::Assignment> final {
 };
 
 template<>
+struct Stmt<ast::CompoundAssignment> final {
+    std::size_t line;
+    TokenType operation;
+    std::unique_ptr<Node> target;
+    std::unique_ptr<Node> expression;
+
+    Stmt(std::size_t line, TokenType operation, std::unique_ptr<Node> target, std::unique_ptr<Node> expression) :
+        line(line), operation(operation), target(std::move(target)), expression(std::move(expression))
+    {}
+};
+
+template<>
 struct Stmt<ast::Block> {
     std::size_t line;
     std::vector<std::unique_ptr<Node>> statements;

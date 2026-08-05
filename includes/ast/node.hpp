@@ -7,6 +7,7 @@
 #include "token.hpp"
 #include "expr.hpp"
 #include "stmt.hpp"
+#include "type.hpp"
 
 struct Node final{
     std::variant<
@@ -22,6 +23,7 @@ struct Node final{
         Expr<ast::EndOfFile>,
         Stmt<ast::VariableDeclaration>,
         Stmt<ast::Assignment>,
+        Stmt<ast::CompoundAssignment>,
         Stmt<ast::Block>,
         Stmt<ast::If>,
         Stmt<ast::loop::While>,
@@ -29,7 +31,8 @@ struct Node final{
         Stmt<ast::loop::doWhile>,
         Stmt<ast::loop::Break>,
         Stmt<ast::loop::Continue>,
-        Stmt<ast::Nothing>
+        Stmt<ast::Nothing>,
+        Type<ast::type::NamedType>
     >value;
 
 

@@ -13,6 +13,9 @@
                 "${workspaceFolder}/src/lexer",
                 "${workspaceFolder}/src/lexer/implements",
                 "${workspaceFolder}/src/parser",
+                "${workspaceFolder}/src/parser/expression",
+                "${workspaceFolder}/src/parser/statements",
+                "${workspaceFolder}/src/parser/type",
                 "${workspaceFolder}/src/ast",
                 "${workspaceFolder}/src/eval"
             ],

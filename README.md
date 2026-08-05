@@ -2,7 +2,8 @@
 ```
 lang
 ├─ docs
-│  └─ grammar.md
+│  ├─ grammar.md
+│  └─ make.md
 ├─ includes
 │  ├─ ast
 │  │  ├─ ASTprinter
@@ -10,7 +11,8 @@ lang
 │  │  ├─ ast.hpp
 │  │  ├─ expr.hpp
 │  │  ├─ node.hpp
-│  │  └─ stmt.hpp
+│  │  ├─ stmt.hpp
+│  │  └─ type.hpp
 │  ├─ eval.hpp
 │  ├─ lexer
 │  │  ├─ README.md
@@ -30,7 +32,8 @@ lang
    ├─ ast
    │  ├─ ast.cpp
    │  ├─ printExpr.cpp
-   │  └─ printStmt.cpp
+   │  ├─ printStmt.cpp
+   │  └─ printType.cpp
    ├─ eval
    │  └─ eval.cpp
    ├─ lexer
@@ -52,14 +55,17 @@ lang
    │  │  ├─ term.cpp
    │  │  └─ unary.cpp
    │  ├─ parser.cpp
-   │  └─ statements
-   │     ├─ assingment.cpp
-   │     ├─ block.cpp
-   │     ├─ breakContinue.cpp
-   │     ├─ forStatement.cpp
-   │     ├─ ifStatement.cpp
-   │     ├─ variableDeclaration.cpp
-   │     └─ whileStatement.cpp
+   │  ├─ statements
+   │  │  ├─ assingment.cpp
+   │  │  ├─ block.cpp
+   │  │  ├─ breakContinue.cpp
+   │  │  ├─ doWhile.cpp
+   │  │  ├─ forStatement.cpp
+   │  │  ├─ ifStatement.cpp
+   │  │  ├─ variableDeclaration.cpp
+   │  │  └─ whileStatement.cpp
+   │  └─ type
+   │     └─ namedType.cpp
    └─ token
       └─ token.cpp
 

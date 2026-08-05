@@ -14,6 +14,7 @@ namespace ast {
 namespace ast {
     struct VariableDeclaration final {};
     struct Assignment final {};
+    struct CompoundAssignment final {};
     struct If final {};
     
     namespace loop {
@@ -22,6 +23,10 @@ namespace ast {
         struct For final {};
         struct Break final {};
         struct Continue final {};
+    }
+
+    namespace type {
+        struct NamedType final {};
     }
 
 

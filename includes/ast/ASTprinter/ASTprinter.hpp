@@ -35,6 +35,7 @@ namespace ast::details {
 
         void print(const Stmt<ast::VariableDeclaration>& stmt);
         void print(const Stmt<ast::Assignment>& stmt);
+        void print(const Stmt<ast::CompoundAssignment>& stmt);
         void print(const Stmt<ast::Return>& stmt);
         void print(const Stmt<ast::Block>& stmt);
         void print(const Stmt<ast::If>& stmt);
@@ -44,6 +45,7 @@ namespace ast::details {
         void print(const Stmt<ast::loop::Break>& stmt);
         void print(const Stmt<ast::loop::Continue>& stmt);
         void print(const Stmt<ast::Nothing>& stmt);
+        void print(const Type<ast::type::NamedType>& type);
 
         std::string str{""};
         std::size_t spaces = 0;

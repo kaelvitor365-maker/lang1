@@ -51,6 +51,27 @@ void ast::details::printer::print(const Stmt<ast::Assignment>& stmt){
 
 }
 
+void ast::details::printer::print(const Stmt<ast::CompoundAssignment>& stmt){
+
+    this->str += this->putSpace() + "Compound Assignment:\n" + this->putSpace() + "{\n"; ++this->spaces;
+
+    this->str += std::format("{0}line: {1}\n", this->putSpace(), stmt.line);
+    this->str += std::format("{0}operation: {1}\n", this->putSpace(), stmt.operation);
+
+    this->str += this->putSpace() + "target:\n";
+    this->str += this->putSpace() + "{\n"; ++this->spaces;
+    this->print(*stmt.target); --this->spaces;
+    this->str += this->putSpace() + "}\n";
+
+    this->str += this->putSpace() + "expression:\n";
+    this->str += this->putSpace() + "{\n"; ++this->spaces;
+    this->print(*stmt.expression); --this->spaces;
+    this->str += this->putSpace() + "}\n"; --this->spaces;
+
+    this->str += this->putSpace() + "}\n";
+
+}
+
 void ast::details::printer::print(const Stmt<ast::Block>& stmt){
 
     this->str += this->putSpace() + "Block:\n" + this->putSpace() + "{\n"; ++this->spaces;
