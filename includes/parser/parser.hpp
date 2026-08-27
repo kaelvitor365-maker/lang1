@@ -29,7 +29,6 @@ class Parser final {
     Node statement();
     Node variableDeclaration();
     Node assignment();
-    Node compoundAssignment();
     Node block();
     Node ifStatement();
     Node whileStatement();
