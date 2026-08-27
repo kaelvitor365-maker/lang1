@@ -92,7 +92,7 @@ Node Parser::forVariableDeclaration(){
     this->consume(TokenType::TOKEN_VAR);
 
 
-    Node target = this->primary();
+    Node target = this->type();
 
 
 

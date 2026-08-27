@@ -6,6 +6,7 @@ Node Parser::bitwise(){
     while(
         this->check(TokenType::TOKEN_AND) ||
         this->check(TokenType::TOKEN_OR) ||
+        this->check(TokenType::TOKEN_XOR) ||
         this->check(TokenType::TOKEN_LSHIFT) ||
         this->check(TokenType::TOKEN_RSHIFT)
     ){

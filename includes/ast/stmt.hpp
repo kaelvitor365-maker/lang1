@@ -47,7 +47,7 @@ struct Stmt<ast::CompoundAssignment> final {
 };
 
 template<>
-struct Stmt<ast::Block> {
+struct Stmt<ast::Block> final{
     std::size_t line;
     std::vector<std::unique_ptr<Node>> statements;
 
@@ -60,7 +60,7 @@ struct Stmt<ast::Block> {
 
 
 template<>
-struct Stmt<ast::If> {
+struct Stmt<ast::If> final {
     std::size_t line;
     std::unique_ptr<Node> condition;
     std::unique_ptr<Node> thenBranch;
@@ -72,7 +72,7 @@ struct Stmt<ast::If> {
 };
 
 template<>
-struct Stmt<ast::loop::While> {
+struct Stmt<ast::loop::While> final{
     std::size_t line;
     std::unique_ptr<Node> condition;
     std::unique_ptr<Node> body;
@@ -83,7 +83,7 @@ struct Stmt<ast::loop::While> {
 };
 
 template<>
-struct Stmt<ast::loop::doWhile> {
+struct Stmt<ast::loop::doWhile> final {
     std::size_t line;
     std::unique_ptr<Node> condition;
     std::unique_ptr<Node> body;
@@ -93,7 +93,7 @@ struct Stmt<ast::loop::doWhile> {
     {}
 };
 template<>
-struct Stmt<ast::loop::For> {
+struct Stmt<ast::loop::For> final {
     std::size_t line;
     std::unique_ptr<Node> initializer;
     std::unique_ptr<Node> condition;
@@ -106,21 +106,21 @@ struct Stmt<ast::loop::For> {
 };
 
 template<>
-struct Stmt<ast::loop::Break> {
+struct Stmt<ast::loop::Break> final {
     std::size_t line;
 
     Stmt(std::size_t line) : line(line) {}
 };
 
 template<>
-struct Stmt<ast::loop::Continue> {
+struct Stmt<ast::loop::Continue> final {
     std::size_t line;   
 
     Stmt(std::size_t line) : line(line) {}
 };
 
 template<>
-struct Stmt<ast::Nothing> {
+struct Stmt<ast::Nothing> final {
     std::size_t line;
 
     Stmt(std::size_t line) : line(line) {}

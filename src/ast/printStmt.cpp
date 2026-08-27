@@ -15,7 +15,7 @@ void ast::details::printer::print(const Stmt<ast::VariableDeclaration>& stmt){
     this->str += this->putSpace() + "type:\n";
     this->str += this->putSpace() + "{\n"; ++this->spaces;
     this->print(*stmt.type); --this->spaces;
-    this->str += this->putSpace() + "}\n";
+    this->str += this->putSpace() + "}\n"; --this->spaces;
 
     this->str += this->putSpace() + "initializer:\n";
     this->str += this->putSpace() + "{\n"; ++this->spaces;

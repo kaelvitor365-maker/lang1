@@ -110,6 +110,7 @@ class Lexer final{
                 {'-', TokenType::TOKEN_MINUS},
                 {'*', TokenType::TOKEN_MUL},
                 {'/', TokenType::TOKEN_DIV},
+                {'%', TokenType::TOKEN_MOD},
                 {'=', TokenType::TOKEN_EQUAL},
                 {'!', TokenType::TOKEN_NOT},
                 {'&', TokenType::TOKEN_AND},
@@ -140,6 +141,8 @@ class Lexer final{
             {"*=", TokenType::TOKEN_MULEQ},
             {"=:", TokenType::TOKEN_INFERED_TYPE},
             {"/=", TokenType::TOKEN_DIVEQ},
+            {">=", TokenType::TOKEN_GTEQ},
+            {"<=", TokenType::TOKEN_LTEQ},
             {"==", TokenType::TOKEN_EQEQ},
             {"!=", TokenType::TOKEN_NOTEQ},
             {"~=", TokenType::TOKEN_NOTBEQ},
@@ -168,13 +171,14 @@ class Lexer final{
             {"while", TokenType::TOKEN_WHILE},
             {"do", TokenType::TOKEN_DO_WHILE},
             {"break", TokenType::TOKEN_BREAK},
-            {"continue", TokenType::TOKEN_CONTINUE},
-            {"func", TokenType::TOKEN_FUNC},
-            {"return", TokenType::TOKEN_RETURN},
-            {"main", TokenType::TOKEN_MAIN},
+            {"true", TokenType::TOKEN_BOOL},
+            {"false", TokenType::TOKEN_BOOL},
             {"var", TokenType::TOKEN_VAR},
+            {"return", TokenType::TOKEN_RETURN},
+            {"func", TokenType::TOKEN_FUNC},
+            {"main", TokenType::TOKEN_MAIN},
             {"nothing", TokenType::TOKEN_NOTHING},
-
+            {"continue", TokenType::TOKEN_CONTINUE}
         };
 
 

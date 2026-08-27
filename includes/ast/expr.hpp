@@ -13,7 +13,7 @@ template <typename T>
 struct Expr {};
 
 template <>
-struct Expr<ast::Number> {
+struct Expr<ast::Number> final{
     std::uint64_t number;
     std::size_t line;
     Expr(std::uint64_t number, std::size_t line) :
@@ -22,7 +22,7 @@ struct Expr<ast::Number> {
 };
 
 template <>
-struct Expr<ast::String> {
+struct Expr<ast::String> final{
     std::string str;
     std::size_t line;
     Expr(std::string str, std::size_t line) :
@@ -31,7 +31,7 @@ struct Expr<ast::String> {
 };
 
 template <>
-struct Expr<ast::Identifier> {
+struct Expr<ast::Identifier> final{
     std::string name;
     std::size_t line;
     Expr(std::string name, std::size_t line) :
@@ -40,7 +40,7 @@ struct Expr<ast::Identifier> {
 };
 
 template <>
-struct Expr<ast::Boolean> {
+struct Expr<ast::Boolean> final{
     bool boolean;
     std::size_t line;
     Expr(bool boolean, std::size_t line) :
@@ -49,7 +49,7 @@ struct Expr<ast::Boolean> {
 };
 
 template <>
-struct Expr<ast::Unary> {
+struct Expr<ast::Unary> final{
     TokenType operation;
     std::size_t line;
     std::unique_ptr<Node> expression;
@@ -59,7 +59,7 @@ struct Expr<ast::Unary> {
 };
 
 template<>
-struct Expr<ast::Binary> {
+struct Expr<ast::Binary> final {
     TokenType operation;
     std::size_t line;
     std::unique_ptr<Node> left, right;
@@ -69,7 +69,7 @@ struct Expr<ast::Binary> {
 };
 
 template<>
-struct Expr<ast::Call> {
+struct Expr<ast::Call> final{
     std::size_t line;
     std::unique_ptr<Node> callee;
     std::vector<std::unique_ptr<Node>> arguments;
@@ -80,7 +80,7 @@ struct Expr<ast::Call> {
 };
 
 template<>
-struct Expr<ast::EndOfFile> {
+struct Expr<ast::EndOfFile> final {
     std::size_t line;
     TokenType token;
 
@@ -90,7 +90,7 @@ struct Expr<ast::EndOfFile> {
 };
 
 template<>
-struct Expr<ast::Assignment> {
+struct Expr<ast::Assignment> final {
     std::size_t line;
     std::unique_ptr<Node> target;
     std::unique_ptr<Node> expression;
